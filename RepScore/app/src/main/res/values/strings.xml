@@ -7,4 +7,10 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_excerises">ExcerisesActivity</string>
+    <string name="title_activity_workout">WorkoutActivity</string>
+    <string name="title_activity_highscores">HighscoresActivity</string>
+
+    <string name="facebook_app_id">458578941458032</string>
+    <string name="fb_login_protocol_scheme">fb458578941458032</string>
 </resources>

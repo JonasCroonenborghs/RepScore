@@ -29,11 +29,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(loginActivity);
     }
 
-    public void btn_home_onClick(View v) {
-        Intent homeActivity = new Intent(this, HomeActivity.class);
-        startActivity(homeActivity);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

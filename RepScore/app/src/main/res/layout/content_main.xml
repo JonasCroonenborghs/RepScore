@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/auteurJasper"
+            android:text="Jasper Claes - r0746526"
             android:textSize="15sp" />
 
         <LinearLayout
@@ -56,16 +56,6 @@
                 android:background="@color/orangeRed"
                 android:onClick="btn_login_onClick"
                 android:text="Login"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/btn_home"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:background="@color/orangeRed"
-                android:onClick="btn_home_onClick"
-                android:text="Home"
                 android:textColor="@color/white" />
 
         </LinearLayout>
