@@ -62,4 +62,27 @@ public class JsonHelper {
 
         return list;
     }
+
+    public ExerciseImage getExerciseImage(String jsonText, long exerciseID) {
+        ExerciseImage exerciseImage = new ExerciseImage();
+
+        try {
+            JSONObject jsonObjectExerciseImages = new JSONObject(jsonText);
+            JSONArray jsonArrayResult = jsonObjectExerciseImages.getJSONArray("results");
+
+            for (int i = 0; i < jsonArrayResult.length(); i++) {
+                JSONObject jsonObjectExerciseImage = jsonArrayResult.getJSONObject(i);
+
+                if (jsonObjectExerciseImage.getLong("exercise") == exerciseID) {
+                    exerciseImage.setId(jsonObjectExerciseImage.getLong("id"));
+                    exerciseImage.setImage(jsonObjectExerciseImage.getString("image"));
+                    exerciseImage.setExercise(jsonObjectExerciseImage.getLong("exercise"));
+                }
+            }
+        } catch (JSONException e) {
+            Log.e("JSON Parser", "Error parsing data " + e.toString());
+        }
+
+        return exerciseImage;
+    }
 }

@@ -3,11 +3,13 @@ package be.thomasmore.repscore;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -44,8 +47,10 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ExcerisesActivity extends AppCompatActivity {
 
     List<MuscleGroup> muscleGroups;
-    List<Exercise> exercises;
+    List<Exercise> exercisesList = new ArrayList<>();
+    List<ExerciseImage> exerciseImagesList = new ArrayList<>();
 
+    long exerciseID;
     String exerciseName;
     String exerciseDescription;
 
@@ -72,21 +77,19 @@ public class ExcerisesActivity extends AppCompatActivity {
         listViewExercises.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                listViewExercises.setAdapter(null);
+                listViewExercises.setAdapter(null);
 
-                Log.i("INFO", "exercises: " + exercises.size());
+                exerciseID = exercisesList.get(position).getId();
+                exerciseName = exercisesList.get(position).getName();
+                exerciseDescription = exercisesList.get(position).getDescription();
 
-//                exerciseName = exercises.get(position).getName();
-//                exerciseDescription = exercises.get(position).getDescription();
+                TextView textViewExerciseName = (TextView) findViewById(R.id.textViewExerciseName);
+                textViewExerciseName.setText("Exercise: " + exerciseName);
 
-//                Log.i("INFO", "exerciseName: " + exerciseName);
-//                Log.i("INFO", "exerciseDescription: " + exerciseDescription);
+                TextView textViewExerciseDescription = (TextView) findViewById(R.id.textViewExerciseDescription);
+                textViewExerciseDescription.setText("Description: " + exerciseDescription);
 
-//                TextView textViewExerciseName = (TextView) findViewById(R.id.textViewExerciseName);
-//                textViewExerciseName.setText("Exercise: " + exerciseName);
-//
-//                TextView textViewExerciseDescription = (TextView) findViewById(R.id.textViewExerciseDescription);
-//                textViewExerciseDescription.setText("Description: " + exerciseDescription);
+                readExerciseImage(exerciseID);
             }
         });
     }
@@ -122,9 +125,10 @@ public class ExcerisesActivity extends AppCompatActivity {
                 @Override
                 public void resultReady(String result) {
                     JsonHelper jsonHelper = new JsonHelper();
-                    exercises = jsonHelper.getExercises(result, category, muscleGroups);
+                    List<Exercise> exercises = jsonHelper.getExercises(result, category, muscleGroups);
 
                     for (int j = 0; j < exercises.size(); j++) {
+                        exercisesList.add(exercises.get(j));
                         exerciseNames.add(exercises.get(j).getName());
                     }
 
@@ -136,6 +140,26 @@ public class ExcerisesActivity extends AppCompatActivity {
                 }
             });
             httpReader.execute("https://wger.de/api/v2/exercise/?format=json&page=" + i);
+        }
+    }
+
+    private void readExerciseImage(final long exerciseID) {
+        for (int i = 1; i <= 11; i++) {
+            HttpReader httpReader = new HttpReader();
+            final int pageCounter = i;
+            httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+                @Override
+                public void resultReady(String result) {
+                    if (pageCounter == 11) {
+                        JsonHelper jsonHelper = new JsonHelper();
+                        ExerciseImage exerciseImage = jsonHelper.getExerciseImage(result, exerciseID);
+
+                        ImageView imageViewExerciseImage = (ImageView) findViewById(R.id.imageViewExerciseImage);
+                        Picasso.get().load(exerciseImage.getImage()).into(imageViewExerciseImage);
+                    }
+                }
+            });
+            httpReader.execute("https://wger.de/api/v2/exerciseimage/?format=json&page=" + i);
         }
     }
 }
