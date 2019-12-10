@@ -24,17 +24,37 @@
             android:layout_height="350dp"
             android:src="@drawable/logo_home" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@string/auteurJonas"
-            android:textSize="15sp" />
+            android:layout_gravity="center"
+            android:background="@drawable/border_shadow"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="@string/auteurJonas"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Jasper Claes - r0746526"
-            android:textSize="15sp" />
+            android:layout_gravity="center"
+            android:background="@drawable/border_shadow"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="Jasper Claes - r0746526"
+                android:textSize="15sp" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"

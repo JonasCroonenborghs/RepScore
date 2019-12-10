@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,118 +8,130 @@
     tools:context=".HomeActivity"
     tools:showIn="@layout/activity_home">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:text="@string/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingTop="10dp"
-        android:paddingRight="24dp">
+        android:background="@color/orangeRed"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
-        <TextView
-            android:id="@+id/textViewName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="25sp" />
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical">-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="20dp"
-            android:text="Workouts this month: 1"
-            android:textSize="20sp" />
+    <!--        <TextView-->
+    <!--            android:id="@+id/textViewName"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:gravity="center"-->
+    <!--            android:textSize="25sp" />-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Last workout: 02/11/2019"
-            android:textSize="20sp" />
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            android:background="@drawable/border_shadow"-->
+    <!--            android:orientation="vertical">-->
 
-        <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/border_shadow"
-            android:orientation="vertical"
-            android:layout_margin="20dp">
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center"-->
+    <!--                android:padding="20dp"-->
+    <!--                android:text="Personal records"-->
+    <!--                android:textSize="20sp" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="20dp"
-                android:text="Personal records"
-                android:textSize="20sp" />
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:text="Banchpress: 80kg"-->
+    <!--                android:textSize="15sp" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Banchpress: 80kg"
-                android:textSize="15sp" />
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:text="Barbell row: 70kg"-->
+    <!--                android:textSize="15sp" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Barbell row: 70kg"
-                android:textSize="15sp" />
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:text="Squad: 80kg"-->
+    <!--                android:textSize="15sp" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Squad: 80kg"
-                android:textSize="15sp" />
+    <!--        </LinearLayout>-->
 
-        </LinearLayout>
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            android:gravity="center"-->
+    <!--            android:orientation="vertical">-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_margin="20dp">
+    <!--            <Button-->
+    <!--                android:id="@+id/btn_all_exercises"-->
+    <!--                android:layout_width="200dp"-->
+    <!--                android:layout_height="100dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@color/orangeRed"-->
+    <!--                android:onClick="btn_exercises_onClick"-->
+    <!--                android:text="Exercises"-->
+    <!--                android:textColor="@color/white" />-->
 
-            <Button
-                android:id="@+id/btn_all_exercises"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:background="@color/orangeRed"
-                android:onClick="btn_exercises_onClick"
-                android:layout_margin="10dp"
-                android:textColor="@color/white"
-                android:text="Exercises" />
+    <!--            <Button-->
+    <!--                android:id="@+id/btn_start_workout"-->
+    <!--                android:layout_width="200dp"-->
+    <!--                android:layout_height="100dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@color/orangeRed"-->
+    <!--                android:onClick="btn_workout_onClick"-->
+    <!--                android:text="Start workout"-->
+    <!--                android:textColor="@color/white" />-->
 
-            <Button
-                android:id="@+id/btn_start_workout"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:background="@color/orangeRed"
-                android:onClick="btn_workout_onClick"
-                android:layout_margin="10dp"
-                android:textColor="@color/white"
-                android:text="Start workout" />
+    <!--            <Button-->
+    <!--                android:id="@+id/btn_highscores"-->
+    <!--                android:layout_width="200dp"-->
+    <!--                android:layout_height="100dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:background="@color/orangeRed"-->
+    <!--                android:onClick="btn_highscores_onClick"-->
+    <!--                android:text="Highscores"-->
+    <!--                android:textColor="@color/white" />-->
+    <!--        </LinearLayout>-->
 
-            <Button
-                android:id="@+id/btn_highscores"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:background="@color/orangeRed"
-                android:onClick="btn_highscores_onClick"
-                android:layout_margin="10dp"
-                android:textColor="@color/white"
-                android:text="Highscores" />
-        </LinearLayout>
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottomNavigation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        app:itemBackground="@color/orangeRed"-->
+    <!--        app:itemIconTint="@android:color/white"-->
+    <!--        app:itemTextColor="@android:color/white"-->
+    <!--        app:menu="@menu/bottom_nav_menu" />-->
 
+    <!--    </LinearLayout>-->
 
-    </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

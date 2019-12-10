@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -79,15 +80,21 @@ public class ExcerisesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listViewExercises.setAdapter(null);
 
+                LinearLayout linearLayoutExercise = (LinearLayout) findViewById(R.id.linearLayoutExercise);
+                linearLayoutExercise.setVisibility(View.VISIBLE);
+
                 exerciseID = exercisesList.get(position).getId();
                 exerciseName = exercisesList.get(position).getName();
                 exerciseDescription = exercisesList.get(position).getDescription();
 
+                exerciseDescription = exerciseDescription.replaceAll("<p>", "");
+                exerciseDescription = exerciseDescription.replaceAll("</p>", "");
+
                 TextView textViewExerciseName = (TextView) findViewById(R.id.textViewExerciseName);
-                textViewExerciseName.setText("Exercise: " + exerciseName);
+                textViewExerciseName.setText(exerciseName);
 
                 TextView textViewExerciseDescription = (TextView) findViewById(R.id.textViewExerciseDescription);
-                textViewExerciseDescription.setText("Description: " + exerciseDescription);
+                textViewExerciseDescription.setText(exerciseDescription);
 
                 readExerciseImage(exerciseID);
             }
@@ -117,8 +124,11 @@ public class ExcerisesActivity extends AppCompatActivity {
 
     private void readExercises(final long category) {
         final List<String> exerciseNames = new ArrayList<>();
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         for (int i = 1; i <= 31; i++) {
+            progressBar.setVisibility(View.VISIBLE);
+
             HttpReader httpReader = new HttpReader();
             final int pageCounter = i;
             httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
@@ -133,6 +143,7 @@ public class ExcerisesActivity extends AppCompatActivity {
                     }
 
                     if (pageCounter == 31) {
+                        progressBar.setVisibility(View.INVISIBLE);
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ExcerisesActivity.this, android.R.layout.simple_list_item_1, exerciseNames);
                         ListView listViewExercises = (ListView) findViewById(R.id.listViewExercises);
                         listViewExercises.setAdapter(adapter);
