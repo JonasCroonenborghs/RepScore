@@ -89,6 +89,10 @@ public class ExcerisesActivity extends AppCompatActivity {
 
                 exerciseDescription = exerciseDescription.replaceAll("<p>", "");
                 exerciseDescription = exerciseDescription.replaceAll("</p>", "");
+                exerciseDescription = exerciseDescription.replaceAll("<ol>", "");
+                exerciseDescription = exerciseDescription.replaceAll("</ol>", "");
+                exerciseDescription = exerciseDescription.replaceAll("<li>", "");
+                exerciseDescription = exerciseDescription.replaceAll("</li>", "");
 
                 TextView textViewExerciseName = (TextView) findViewById(R.id.textViewExerciseName);
                 textViewExerciseName.setText(exerciseName);

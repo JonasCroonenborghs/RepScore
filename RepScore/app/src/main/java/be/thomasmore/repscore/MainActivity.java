@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(loginActivity);
     }
 
+    public void btn_exercises_onClick(View v) {
+        Intent exercisesActivity = new Intent(this, ExcerisesActivity.class);
+        startActivity(exercisesActivity);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
