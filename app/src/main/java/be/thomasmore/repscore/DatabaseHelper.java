@@ -1,8 +1,12 @@
 package be.thomasmore.repscore;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -39,11 +43,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void insertCompoundLifts(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO compoundlift (id, name) VALUES (1, 'Bench Press');");
-        db.execSQL("INSERT INTO compoundlift (id, name) VALUES (2, 'Deadlift');");
-        db.execSQL("INSERT INTO compoundlift (id, name) VALUES (3, 'Squat');");
-        db.execSQL("INSERT INTO compoundlift (id, name) VALUES (4, 'Military Press');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (1, 'Bench Press', 'Do this if you want a BIG CHEST !!');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (2, 'Deadlift','D Lift Desc');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (3, 'Squat', 'SQUAT BITCH!');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (4, 'Military Press','Boulders for Shoulders');");
     }
+
+
+
+    public List<CompoundLift> getCompoundLifts() {
+        List<CompoundLift> lijst = new ArrayList<CompoundLift>();
+
+        String selectQuery = "SELECT  * FROM compoundlift";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CompoundLift compoundLift = new CompoundLift(cursor.getLong(0),
+                        cursor.getString(1), cursor.getString(2));
+                lijst.add(compoundLift);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
+
 
 
     @Override

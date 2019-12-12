@@ -16,15 +16,21 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class WorkoutActivity extends AppCompatActivity {
     final Context context = this;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,37 @@ public class WorkoutActivity extends AppCompatActivity {
         dropdown.setAdapter(adapter);
 
         setTitle("All Exercises");
+        db = new DatabaseHelper(this);
+        readCompoundLifts();
+
+    }
+    private void toon(String tekst)
+    {
+        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    private void readCompoundLifts(){
+        final List<CompoundLift> compoundLifts = db.getCompoundLifts();
+
+        ArrayAdapter<CompoundLift> adapter =
+                new ArrayAdapter<CompoundLift>(this,
+                        android.R.layout.simple_list_item_1, compoundLifts);
+
+        final ListView listViewCompoundLifts =
+                (ListView) findViewById(R.id.listViewCompoundLifts);
+        listViewCompoundLifts.setAdapter(adapter);
+
+
+        listViewCompoundLifts.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
+                        toon(compoundLifts.get(position).getName());
+                    }
+                });
     }
 
     public void btn_add(View arg0) {
