@@ -39,29 +39,23 @@ public class HomeActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.action_user:
-                        Bundle bundle = new Bundle();
-
-                        bundle.putString("id", getIntent().getExtras().getString("id"));
-                        bundle.putString("name", getIntent().getExtras().getString("id"));
-                        bundle.putString("first_name", getIntent().getExtras().getString("first_name"));
-                        bundle.putString("last_name", getIntent().getExtras().getString("last_name"));
-                        bundle.putString("email", getIntent().getExtras().getString("email"));
-                        bundle.putString("gender", getIntent().getExtras().getString("gender"));
-
-                        fragment.setArguments(bundle);
+//                        Bundle bundle = new Bundle();
+//
+//                        bundle.putString("id", getIntent().getExtras().getString("id"));
+//                        bundle.putString("name", getIntent().getExtras().getString("id"));
+//                        bundle.putString("first_name", getIntent().getExtras().getString("first_name"));
+//                        bundle.putString("last_name", getIntent().getExtras().getString("last_name"));
+//                        bundle.putString("email", getIntent().getExtras().getString("email"));
+//                        bundle.putString("gender", getIntent().getExtras().getString("gender"));
+//
+//                        fragment.setArguments(bundle);
                         fragment = new UserFragment();
                         break;
-                    case R.id.action_exercises:
-                        Intent exerciseActivity = new Intent(HomeActivity.this, ExcerisesActivity.class);
-                        startActivity(exerciseActivity);
-                        break;
                     case R.id.action_workout:
-                        Intent workoutActivity = new Intent(HomeActivity.this, WorkoutActivity.class);
-                        startActivity(workoutActivity);
+                        fragment = new WorkoutFragment();
                         break;
                     case R.id.action_highscores:
-                        Intent highscoresActivity = new Intent(HomeActivity.this, HighscoresActivity.class);
-                        startActivity(highscoresActivity);
+                        fragment = new HighscoresFragment();
                         break;
                 }
                 return loadFragment(fragment);
@@ -91,19 +85,4 @@ public class HomeActivity extends AppCompatActivity {
         }
         return false;
     }
-
-//    public void btn_exercises_onClick(View v) {
-//        Intent exerciseActivity = new Intent(this, ExcerisesActivity.class);
-//        startActivity(exerciseActivity);
-//    }
-//
-//    public void btn_workout_onClick(View v) {
-//        Intent workoutActivity = new Intent(this, WorkoutActivity.class);
-//        startActivity(workoutActivity);
-//    }
-//
-//    public void btn_highscores_onClick(View v) {
-//        Intent highscoresActivity = new Intent(this, HighscoresActivity.class);
-//        startActivity(highscoresActivity);
-//    }
 }

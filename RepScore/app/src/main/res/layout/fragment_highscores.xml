@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".WorkoutActivity"
-    tools:showIn="@layout/activity_workout">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,11 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Add a workout exercise"
-            android:textSize="25sp" />
+            android:text="Who lifts the most?"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Choose an exercise and compare your RepScore"
+            android:textSize="10dp" />
 
         <Spinner
-            android:id="@+id/spinner3"
+            android:id="@+id/spinner2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
@@ -44,8 +45,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="20dp"
-                android:text="Bench Press"
+                android:padding="2dp"
+                android:text="1"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Keoma Sijmons"
                 android:textSize="20sp" />
 
             <TextView
@@ -53,22 +62,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Compound lift"
+                android:text="1RM: 135kg"
                 android:textSize="15sp" />
 
-
-            <Button
-                android:id="@+id/buttonShowCustomDialog"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:background="@color/orangeRed"
-                android:drawableLeft="@android:drawable/ic_input_add"
-                android:onClick="btn_add"
-                android:text="Voeg 1RM toe"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Last updated: 15/09/2019"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -84,8 +87,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="20dp"
-                android:text="Decline bench press"
+                android:padding="2dp"
+                android:text="2"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Joran VandePlas"
                 android:textSize="20sp" />
 
             <TextView
@@ -93,19 +104,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Compound lift for lower chest"
+                android:text="1RM: 100kg"
                 android:textSize="15sp" />
 
-            <Button
-                android:id="@+id/btn_addworkout1"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:background="@color/orangeRed"
-                android:drawableLeft="@android:drawable/ic_input_add"
-                android:text="Voeg 1RM toe"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Last updated: 08/07/2019"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -121,8 +129,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="20dp"
-                android:text="Dumbell Press"
+                android:padding="2dp"
+                android:text="3"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Jasper Claes"
                 android:textSize="20sp" />
 
             <TextView
@@ -130,20 +146,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Bench press with dumbells"
+                android:text="1RM: 90kg"
                 android:textSize="15sp" />
 
-            <Button
-                android:id="@+id/btn_addworkout2"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:background="@color/orangeRed"
-                android:drawableLeft="@android:drawable/ic_input_add"
-                android:text="Voeg 1RM toe"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Last updated: 20/10/2019"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -159,8 +171,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="20dp"
-                android:text="Incline Bench Press"
+                android:padding="2dp"
+                android:text="4"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Jonas Croonenborghs"
                 android:textSize="20sp" />
 
             <TextView
@@ -168,23 +188,18 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Compound lift with use of shoulders"
+                android:text="1RM: 50kg"
                 android:textSize="15sp" />
 
-            <Button
-                android:id="@+id/btn_addworkout4"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:background="@color/orangeRed"
-                android:drawableLeft="@android:drawable/ic_input_add"
-                android:text="Voeg 1RM toe"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Last updated: 05/11/2019"
+                android:textSize="15sp" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

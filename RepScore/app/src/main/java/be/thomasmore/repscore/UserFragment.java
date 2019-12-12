@@ -1,6 +1,7 @@
 package be.thomasmore.repscore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -19,18 +20,14 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user, null);
 
-//        Bundle bundle = this.getArguments();
-//
-//        if (bundle != null) {
-//            String id = bundle.getString("id");
-//            String name = bundle.getString("name");
-//            String first_name = bundle.getString("first_name");
-//            String last_name = bundle.getString("last_name");
-//            String email = bundle.getString("email");
-//            String gender = bundle.getString("gender");
-//
+//        Log.i("INFO", getArguments().getString("id"));
+//            String name = getArguments().getString("name");
+//            String first_name = getArguments().getString("first_name");
+//            String last_name = getArguments().getString("last_name");
+//            String email = getArguments().getString("email");
+//            String gender = getArguments().getString("gender");
+
 //            TextView textViewName = (TextView) getView().findViewById(R.id.textViewUsername);
 //            textViewName.setText("Welcome " + name);
-//        }
     }
 }

@@ -35,26 +35,18 @@ public class WorkoutActivity extends AppCompatActivity {
 
         setTitle("Workout");
 
-
         Spinner dropdown = findViewById(R.id.spinner3);
         String[] items = new String[]{"Choose a bodypart", "Chest", "Back", "Legs", "Shoulders"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
         setTitle("All Exercises");
-
     }
 
+    public void btn_add(View arg0) {
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.modal);
 
-
-
-
-            public void btn_add(View arg0) {
-                final Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.modal);
-
-                dialog.show();
-            }
-
-
+        dialog.show();
+    }
 }

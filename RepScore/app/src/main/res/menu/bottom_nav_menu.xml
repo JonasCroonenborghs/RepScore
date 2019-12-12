@@ -12,13 +12,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_exercises"
-        android:enabled="true"
-        android:icon="@drawable/ic_action_list"
-        android:title="Exercises"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_workout"
         android:enabled="true"
         android:icon="@drawable/ic_action_add"
