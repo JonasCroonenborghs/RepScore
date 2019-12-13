@@ -36,19 +36,16 @@ public class WorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setTitle("Workout");
 
-        Spinner dropdown = findViewById(R.id.spinner3);
-        String[] items = new String[]{"Choose a bodypart", "Chest", "Back", "Legs", "Shoulders"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
 
-        setTitle("All Exercises");
         db = new DatabaseHelper(this);
         readCompoundLifts();
+        readWorkouts();
+
 
     }
     private void toon(String tekst)
@@ -76,6 +73,30 @@ public class WorkoutActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parentView,
                                             View childView, int position, long id) {
                         toon(compoundLifts.get(position).getName());
+                    }
+                });
+    }
+
+
+
+    private void readWorkouts(){
+        final List<Workout> workouts = db.getWorkouts();
+
+        ArrayAdapter<Workout> adapter =
+                new ArrayAdapter<Workout>(this,
+                        android.R.layout.simple_list_item_1, workouts);
+
+        final ListView listViewWorkouts =
+                (ListView) findViewById(R.id.listViewWorkouts);
+        listViewWorkouts.setAdapter(adapter);
+
+
+        listViewWorkouts.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
+                        toon(workouts.get(position).getWeight());
                     }
                 });
     }

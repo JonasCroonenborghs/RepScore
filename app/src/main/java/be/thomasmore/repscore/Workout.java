@@ -1,18 +1,17 @@
 package be.thomasmore.repscore;
 
-import java.util.Date;
 
 public class Workout {
     private long id;
     private String weight;
-    private Date date;
+    private String date;
     private long compoundId;
 
     public Workout(){
 
     }
 
-    public Workout(long id, String weight, Date date, long compoundId) {
+    public Workout(long id, String weight, String date, long compoundId) {
         this.id = id;
         this.weight = weight;
         this.date = date;
@@ -40,11 +39,11 @@ public class Workout {
         this.weight = weight;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
