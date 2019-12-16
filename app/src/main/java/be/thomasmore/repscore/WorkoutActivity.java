@@ -120,7 +120,7 @@ public class WorkoutActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parentView,
                                             View childView, int position, long id) {
-                        toon(workouts.get(position).getWeight());
+                        toon(workouts.get(position).getDate());
                     }
                 });
     }

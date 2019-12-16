@@ -4,10 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -48,10 +46,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     private void insertWorkouts(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (1, '50 kg', '15/06/2019',1);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (2, '120 kg','15/06/2019',2);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (3, '110 kg', '15/06/2019',3);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (4, '60 kg','15/06/2019',4);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (1, 50, '15/06/2019',1);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (2, 120,'15/06/2019',2);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (3, 110, '15/06/2019',3);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (4, 60,'15/06/2019',4);");
     }
 
     @Override
@@ -98,6 +96,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Workout workout = new Workout(cursor.getLong(0),
                         cursor.getDouble(1), cursor.getString(2),
                         cursor.getLong(3));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift compoundLift : compoundLifts) {
+                    if (compoundLift.getId() == workout.getCompoundId()) {
+                        workout.setCoumpound(compoundLift.getName());
+                    }
+                }
+
                 lijst.add(workout);
             } while (cursor.moveToNext());
         }
