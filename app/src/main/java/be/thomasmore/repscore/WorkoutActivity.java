@@ -77,6 +77,12 @@ public class WorkoutActivity extends AppCompatActivity {
         });
     }
 
+
+    private void buttonAdd_onClick(View v){
+
+
+    }
+
     private void readCompoundLifts() {
         final List<CompoundLift> compoundLifts = db.getCompoundLifts();
 

@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Workout workout = new Workout(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2),
+                        cursor.getDouble(1), cursor.getString(2),
                         cursor.getLong(3));
                 lijst.add(workout);
             } while (cursor.moveToNext());

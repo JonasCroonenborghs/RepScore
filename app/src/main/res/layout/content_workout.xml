@@ -13,6 +13,9 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingTop="10dp"
+        android:paddingRight="24dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -21,6 +24,58 @@
             android:gravity="center"
             android:text="Add a workout exercise"
             android:textSize="25sp" />
+
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Kg?"
+            />
+        <EditText
+            android:id="@+id/editKg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:inputType="text"
+            />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="date"
+            />
+        <EditText
+            android:id="@+id/editDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:inputType="text"
+            />
+
+
+
+        <DatePicker
+            android:id="@+id/datePicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"/>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            >
+            <Button
+                android:id="@+id/buttonAdd"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                />
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listViewCompoundLifts"

@@ -3,7 +3,7 @@ package be.thomasmore.repscore;
 
 public class Workout {
     private long id;
-    private String weight;
+    private double weight;
     private String date;
     private long compoundId;
 
@@ -13,7 +13,7 @@ public class Workout {
 
     }
 
-    public Workout(long id, String weight, String date, long compoundId) {
+    public Workout(long id, double weight, String date, long compoundId) {
         this.id = id;
         this.weight = weight;
         this.date = date;
@@ -22,7 +22,7 @@ public class Workout {
 
     @Override
     public String toString() {
-        return weight;
+        return date;
     }
 
     public long getId() {
@@ -33,11 +33,11 @@ public class Workout {
         this.id = id;
     }
 
-    public String getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
