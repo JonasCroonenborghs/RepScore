@@ -11,16 +11,11 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 3;
-
     private static final String DATABASE_NAME = "repscore";
-
-
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -52,9 +47,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void insertWorkouts(SQLiteDatabase db) {
         db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (1, '50 kg', '15/06/2019',1);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (2, '120 kg','',2);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (3, '110 kg', '',3);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (4, '60 kg','',4);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (2, '120 kg','15/06/2019',2);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (3, '110 kg', '15/06/2019',3);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (4, '60 kg','15/06/2019',4);");
     }
 
     @Override
@@ -69,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<CompoundLift> getCompoundLifts() {
         List<CompoundLift> lijst = new ArrayList<CompoundLift>();
 
-        String selectQuery = "SELECT  * FROM compoundlift ORDER BY name";
+        String selectQuery = "SELECT * FROM compoundlift ORDER BY name";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -88,9 +83,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
-
-
     public List<Workout> getWorkouts() {
         List<Workout> lijst = new ArrayList<Workout>();
 
@@ -106,15 +98,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getLong(3));
                 lijst.add(workout);
             } while (cursor.moveToNext());
-
         }
 
         cursor.close();
         db.close();
         return lijst;
     }
-
-
 
 
     public int getCountCompoundLifts() {
@@ -128,12 +117,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return aantal;
     }
-
-
-
-
-
-
-
-
 }

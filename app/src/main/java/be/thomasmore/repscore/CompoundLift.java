@@ -10,15 +10,10 @@ public class CompoundLift {
         this.name = name;
         this.description = description;
     }
-    public CompoundLift(){
 
+    public CompoundLift() {
     }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
+    
     public long getId() {
         return id;
     }
@@ -41,5 +36,10 @@ public class CompoundLift {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

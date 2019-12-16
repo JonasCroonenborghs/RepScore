@@ -36,26 +36,16 @@ public class WorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        setTitle("Workout");
 
         db = new DatabaseHelper(this);
         readCompoundLifts();
         readWorkouts();
-
-
-    }
-    private void toon(String tekst)
-    {
-        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 
-
-
-    private void readCompoundLifts(){
+    private void readCompoundLifts() {
         final List<CompoundLift> compoundLifts = db.getCompoundLifts();
 
         ArrayAdapter<CompoundLift> adapter =
@@ -65,7 +55,6 @@ public class WorkoutActivity extends AppCompatActivity {
         final ListView listViewCompoundLifts =
                 (ListView) findViewById(R.id.listViewCompoundLifts);
         listViewCompoundLifts.setAdapter(adapter);
-
 
         listViewCompoundLifts.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -77,9 +66,7 @@ public class WorkoutActivity extends AppCompatActivity {
                 });
     }
 
-
-
-    private void readWorkouts(){
+    private void readWorkouts() {
         final List<Workout> workouts = db.getWorkouts();
 
         ArrayAdapter<Workout> adapter =
@@ -89,7 +76,6 @@ public class WorkoutActivity extends AppCompatActivity {
         final ListView listViewWorkouts =
                 (ListView) findViewById(R.id.listViewWorkouts);
         listViewWorkouts.setAdapter(adapter);
-
 
         listViewWorkouts.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -106,5 +92,9 @@ public class WorkoutActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.modal);
 
         dialog.show();
+    }
+
+    private void toon(String tekst) {
+        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 }
