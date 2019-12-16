@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
+    private DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +25,18 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Home");
 
-        String name = getIntent().getExtras().getString("name");
+        db = new DatabaseHelper(this);
 
+        String name = getIntent().getExtras().getString("name");
         TextView textViewUserName = (TextView) findViewById(R.id.textViewUserName);
         textViewUserName.setText("Welcome " + name);
+
+        TextView textViewTotalWorkouts = (TextView) findViewById(R.id.textViewTotalWorkouts);
+        textViewTotalWorkouts.setText("You've registered " + db.getCountWorkouts() + " workouts so far");
+
+        Workout lastWorkout = db.getLastWorkout();
+        TextView textViewLastWorkout = (TextView) findViewById(R.id.textViewLastWorkout);
+        textViewLastWorkout.setText("Last " + lastWorkout.getCoumpound() + " workout you've lifted " + lastWorkout.getWeight() + "!");
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

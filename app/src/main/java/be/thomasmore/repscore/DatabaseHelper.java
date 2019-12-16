@@ -4,8 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -105,6 +107,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lijst;
     }
 
+    public int getCountWorkouts() {
+        String selectQuery = "SELECT  * FROM workout";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int total = cursor.getCount();
+
+        cursor.close();
+        db.close();
+        return total;
+    }
+
+    public Workout getLastWorkout() {
+        Workout returnWorkout = new Workout();
+
+        String selectQuery = "SELECT  * FROM workout";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Workout workout = new Workout(cursor.getLong(0),
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getLong(3));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift compoundLift : compoundLifts) {
+                    if (compoundLift.getId() == workout.getCompoundId()) {
+                        workout.setCoumpound(compoundLift.getName());
+                    }
+                }
+
+                returnWorkout = workout;
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return returnWorkout;
+    }
 
     public int getCountCompoundLifts() {
         String selectQuery = "SELECT  * FROM compoundlift";

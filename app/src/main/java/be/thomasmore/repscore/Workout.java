@@ -7,6 +7,8 @@ public class Workout {
     private String date;
     private long compoundId;
 
+    private String coumpound;
+
     public Workout(){
 
     }
@@ -53,5 +55,13 @@ public class Workout {
 
     public void setCompoundId(long compoundId) {
         this.compoundId = compoundId;
+    }
+
+    public String getCoumpound() {
+        return coumpound;
+    }
+
+    public void setCoumpound(String coumpound) {
+        this.coumpound = coumpound;
     }
 }

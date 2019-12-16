@@ -28,8 +28,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:background="@drawable/border_shadow"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -60,7 +60,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="btn_login_onClick"
-                android:text="Login"
+                android:text="Start tracking your workout"
                 android:textColor="@color/white" />
 
             <Button
@@ -70,7 +70,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="btn_exercises_onClick"
-                android:text="Exercises"
+                android:text="View different exercises"
                 android:textColor="@color/white" />
 
         </LinearLayout>
