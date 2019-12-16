@@ -113,6 +113,14 @@ public class WorkoutActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner = findViewById(R.id.listViewCompoundLifts);
 
+        listViewWorkouts.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
+                        toon(workouts.get(position).getDate());
+                    }
+                });
         spinner.setAdapter(adapter);
 
     }

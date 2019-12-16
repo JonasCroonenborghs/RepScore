@@ -55,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         // Adding Callback Manager.
         callbackManager = CallbackManager.Factory.create();
 
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.buttonLogin);
+        Button buttonHomeScreen = (Button) findViewById(R.id.buttonHomeScreen);
 
         // Giving permission to Login Button.
         loginButton.setReadPermissions("email");
@@ -63,8 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         // Checking the Access Token.
         if (AccessToken.getCurrentAccessToken() != null) {
             GraphLoginRequest(AccessToken.getCurrentAccessToken());
-
-            Button buttonHomeScreen = (Button) findViewById(R.id.buttonHomeScreen);
             buttonHomeScreen.setVisibility(View.VISIBLE);
         }
 
@@ -76,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent homeActivity = new Intent(LoginActivity.this, HomeActivity.class);
                 homeActivity.putExtras(bundle);
-
                 startActivity(homeActivity);
             }
 
@@ -104,12 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
                         try {
-                            bundle.putString("id", jsonObject.getString("id"));
                             bundle.putString("name", jsonObject.getString("name"));
-                            bundle.putString("first_name", jsonObject.getString("first_name"));
-                            bundle.putString("last_name", jsonObject.getString("last_name"));
-                            bundle.putString("email", jsonObject.getString("email"));
-                            bundle.putString("gender", jsonObject.getString("gender"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
