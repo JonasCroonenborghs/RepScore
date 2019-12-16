@@ -63,6 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         // Checking the Access Token.
         if (AccessToken.getCurrentAccessToken() != null) {
             GraphLoginRequest(AccessToken.getCurrentAccessToken());
+
+            Button buttonHomeScreen = (Button) findViewById(R.id.buttonHomeScreen);
+            buttonHomeScreen.setVisibility(View.VISIBLE);
         }
 
         // Adding Click listener to Facebook login button.
@@ -73,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent homeActivity = new Intent(LoginActivity.this, HomeActivity.class);
                 homeActivity.putExtras(bundle);
+
                 startActivity(homeActivity);
             }
 
@@ -86,6 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void buttonHomeScreen_onClick(View v) {
+        Intent homeActivity = new Intent(LoginActivity.this, HomeActivity.class);
+        homeActivity.putExtras(bundle);
+        startActivity(homeActivity);
     }
 
     protected void GraphLoginRequest(AccessToken accessToken) {

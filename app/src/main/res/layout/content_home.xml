@@ -10,19 +10,20 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutExercise"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/border_shadow"
         android:gravity="center"
+        android:background="@drawable/border_shadow"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageViewUser"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:padding="20dp" />-->
+        <ImageView
+            android:id="@+id/imageViewUser"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:padding="20dp"
+            android:src="@drawable/user_man" />
 
         <TextView
             android:id="@+id/textViewUserName"
@@ -30,13 +31,6 @@
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/textViewUserEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:textSize="20sp" />
 
     </LinearLayout>
 
