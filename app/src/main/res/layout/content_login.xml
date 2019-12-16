@@ -35,7 +35,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/rounded_button"
             android:onClick="buttonHomeScreen_onClick"
-            android:text="Homescreen"
+            android:text="Go to homescreen"
             android:textColor="@color/white"
             android:visibility="invisible" />
 

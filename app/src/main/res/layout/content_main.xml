@@ -70,7 +70,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="btn_exercises_onClick"
-                android:text="View different exercises"
+                android:text="Show different exercises"
                 android:textColor="@color/white" />
 
         </LinearLayout>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
     private DatabaseHelper db;
+    private Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         String name = getIntent().getExtras().getString("name");
+        bundle.putString("name", name);
         TextView textViewUserName = (TextView) findViewById(R.id.textViewUserName);
         textViewUserName.setText("Welcome " + name);
 
@@ -46,21 +48,16 @@ public class HomeActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.action_user:
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("name", getIntent().getExtras().getString("name"));
-//
-//                        Intent userActivity = new Intent(HomeActivity.this, HomeActivity.class);
-//                        userActivity.putExtras(bundle);
-//                        startActivity(userActivity);
-//                        started = true;
                         break;
                     case R.id.action_workout:
                         Intent workoutActivity = new Intent(HomeActivity.this, WorkoutActivity.class);
+                        workoutActivity.putExtras(bundle);
                         startActivity(workoutActivity);
                         started = true;
                         break;
                     case R.id.action_highscores:
                         Intent highscoresActivity = new Intent(HomeActivity.this, HighscoresActivity.class);
+                        highscoresActivity.putExtras(bundle);
                         startActivity(highscoresActivity);
                         started = true;
                         break;
