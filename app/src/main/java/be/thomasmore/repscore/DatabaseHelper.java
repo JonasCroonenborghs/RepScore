@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String CREATE_TABLE_WORKOUT = "CREATE TABLE workout (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "weight TEXT," +
+                "weight INT," +
                 "date TEXT, " +
                 "compoundliftId INTEGER, " +
                 "FOREIGN KEY (compoundliftId) REFERENCES compoundlift(id))";
@@ -130,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Workout workout = new Workout(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2),
+                        cursor.getDouble(1), cursor.getString(2),
                         cursor.getLong(3));
 
                 List<CompoundLift> compoundLifts = getCompoundLifts();
