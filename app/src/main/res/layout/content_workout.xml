@@ -16,21 +16,40 @@
         android:paddingLeft="24dp"
         android:paddingTop="10dp"
         android:paddingRight="24dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/border_shadow"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Add a workout exercise"
+            android:text="Add a 1 Rep Max !"
             android:textSize="25sp" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Exercise?"
+            android:padding="2dp"
 
+            />
 
+        <Spinner
+            android:id="@+id/listViewCompoundLifts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@android:drawable/btn_dropdown"
+            />
+s
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Kg?"
+            android:padding="2dp"
+
             />
         <EditText
             android:id="@+id/editKg"
@@ -38,21 +57,17 @@
             android:layout_height="wrap_content"
             android:text=""
             android:inputType="text"
+            android:padding="2dp"
+
+
             />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="date"
-            />
-        <EditText
-            android:id="@+id/editDate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:inputType="text"
-            />
+            android:padding="2dp"
 
-
+            />
 
         <DatePicker
             android:id="@+id/datePicker1"
@@ -61,35 +76,17 @@
             android:datePickerMode="spinner"
             android:calendarViewShown="false"/>
 
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            >
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:text="Add"
-                />
+            android:text="Add 1 RM to your workouts"
+            android:padding="2dp"
+            android:onClick="buttonAdd_onClick"
 
-        </LinearLayout>
 
-        <ListView
-            android:id="@+id/listViewCompoundLifts"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/orangeRed"
-            android:dividerHeight="1dp" />
+            />
 
-        <ListView
-            android:id="@+id/listViewWorkouts"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/orangeRed"
-            android:dividerHeight="1dp" />
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

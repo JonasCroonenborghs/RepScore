@@ -79,6 +79,14 @@
                 android:text="Last updated: 15/09/2019"
                 android:textSize="15sp" />
 
+
+            <ListView
+                android:id="@+id/listViewWorkouts"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/orangeRed"
+                android:dividerHeight="1dp" />
+
         </LinearLayout>
 
 

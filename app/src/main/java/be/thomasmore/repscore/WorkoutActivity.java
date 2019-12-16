@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,12 +31,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.List;
 
 public class WorkoutActivity extends AppCompatActivity {
     final Context context = this;
     private DatabaseHelper db;
     private Bundle bundle = new Bundle();
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +48,11 @@ public class WorkoutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Workout");
 
+
         bundle.putString("name", getIntent().getExtras().getString("name"));
 
         db = new DatabaseHelper(this);
         readCompoundLifts();
-        readWorkouts();
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -80,57 +84,63 @@ public class WorkoutActivity extends AppCompatActivity {
 
     private void buttonAdd_onClick(View v){
 
+        EditText editWeight = (EditText) findViewById(R.id.editKg);
+        double weight = Double.parseDouble(editWeight.getText().toString());
+
+        DatePicker editDate = (DatePicker) findViewById(R.id.datePicker1);
+        String date = String.valueOf(editDate.getDayOfMonth());
+
+        Spinner editCompound = (Spinner) findViewById(R.id.listViewCompoundLifts);
+        int compoundId = editCompound.getId();
+
+
+        Workout workout = new Workout();
+        workout.setWeight(weight);
+        workout.setDate(date);
+        workout.setCompoundId(compoundId);
+
+        db.insertWorkout(workout);
+
 
     }
 
-    private void readCompoundLifts() {
-        final List<CompoundLift> compoundLifts = db.getCompoundLifts();
+    private void readCompoundLifts(){
+        List<CompoundLift> compoundLifts = db.getCompoundLifts();
 
-        ArrayAdapter<CompoundLift> adapter =
-                new ArrayAdapter<CompoundLift>(this,
-                        android.R.layout.simple_list_item_1, compoundLifts);
+        ArrayAdapter<CompoundLift> adapter = new ArrayAdapter<CompoundLift>(this,
+                android.R.layout.simple_spinner_dropdown_item,compoundLifts);
 
-        final ListView listViewCompoundLifts =
-                (ListView) findViewById(R.id.listViewCompoundLifts);
-        listViewCompoundLifts.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = findViewById(R.id.listViewCompoundLifts);
 
-        listViewCompoundLifts.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parentView,
-                                            View childView, int position, long id) {
-                        toon(compoundLifts.get(position).getName());
-                    }
-                });
+        spinner.setAdapter(adapter);
+
     }
 
-    private void readWorkouts() {
-        final List<Workout> workouts = db.getWorkouts();
+//    private void readCompoundLifts() {
+//        final List<CompoundLift> compoundLifts = db.getCompoundLifts();
+//
+//        ArrayAdapter<CompoundLift> adapter =
+//                new ArrayAdapter<CompoundLift>(this,
+//                        android.R.layout.simple_list_item_1, compoundLifts);
+//
+//        final ListView listViewCompoundLifts =
+//                (ListView) findViewById(R.id.listViewCompoundLifts);
+//        listViewCompoundLifts.setAdapter(adapter);
+//
+//        listViewCompoundLifts.setOnItemClickListener(
+//                new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parentView,
+//                                            View childView, int position, long id) {
+//                        toon(compoundLifts.get(position).getName());
+//                    }
+//                });
+//    }
 
-        ArrayAdapter<Workout> adapter =
-                new ArrayAdapter<Workout>(this,
-                        android.R.layout.simple_list_item_1, workouts);
 
-        final ListView listViewWorkouts =
-                (ListView) findViewById(R.id.listViewWorkouts);
-        listViewWorkouts.setAdapter(adapter);
 
-        listViewWorkouts.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parentView,
-                                            View childView, int position, long id) {
-                        toon(workouts.get(position).getWeight());
-                    }
-                });
-    }
 
-    public void btn_add(View arg0) {
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.modal);
-
-        dialog.show();
-    }
 
     private void toon(String tekst) {
         Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package be.thomasmore.repscore;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -61,6 +62,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Create tables again
         onCreate(db);
+    }
+
+
+    public long insertWorkout(Workout workout){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("weight", workout.getWeight());
+        values.put("date", workout.getDate());
+        values.put("compoundliftId", workout.getCompoundId());
+
+        long id = db.insert("workout", null, values);
+        db.close();
+        return id;
+
     }
 
     public List<CompoundLift> getCompoundLifts() {
