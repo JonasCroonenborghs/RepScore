@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,9 +33,6 @@ public class HomeActivity extends AppCompatActivity {
     LineChartView lineChartView;
     String[] axisData = null;
     int[] yAxisData = null;
-//    String[] axisData = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept",
-//            "Oct", "Nov", "Dec"};
-//    int[] yAxisData = {50, 20, 15, 30, 20, 60, 15, 40, 45, 10, 90, 18};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,30 +55,67 @@ public class HomeActivity extends AppCompatActivity {
 
         Workout lastWorkout = db.getLastWorkout();
         TextView textViewLastWorkout = (TextView) findViewById(R.id.textViewLastWorkout);
-        textViewLastWorkout.setText(lastWorkout.getDate() + " you've lifted " + lastWorkout.getWeight() + " on the " + lastWorkout.getCoumpound() + "!");
+        textViewLastWorkout.setText("On " + lastWorkout.getDate() + " you've lifted " + lastWorkout.getWeight() + " kg on the " + lastWorkout.getCoumpound() + "!");
 
-        // Chart
+        // Chart switch
+        drawMaxWeightChart();
+
+        Switch switchChart = (Switch) findViewById(R.id.switchChart);
+        switchChart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    drawTotalAmountChart();
+                } else {
+                    drawMaxWeightChart();
+                }
+            }
+        });
+
+        // BottomNavigation
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Boolean started = false;
+
+                switch (item.getItemId()) {
+                    case R.id.action_user:
+                        break;
+                    case R.id.action_workout:
+                        Intent workoutActivity = new Intent(HomeActivity.this, WorkoutActivity.class);
+                        workoutActivity.putExtras(bundle);
+                        startActivity(workoutActivity);
+                        started = true;
+                        break;
+                    case R.id.action_highscores:
+                        Intent highscoresActivity = new Intent(HomeActivity.this, HighscoresActivity.class);
+                        highscoresActivity.putExtras(bundle);
+                        startActivity(highscoresActivity);
+                        started = true;
+                        break;
+                }
+                return started;
+            }
+        });
+    }
+
+    public void drawMaxWeightChart() {
         lineChartView = findViewById(R.id.chart);
 
         List axisValues = new ArrayList();
         List yAxisValues = new ArrayList();
 
         List<Workout> workouts = db.getWorkouts();
+
         axisData = new String[workouts.size()];
         yAxisData = new int[workouts.size()];
         int counter = 0;
 
         for (Workout workout : workouts) {
             axisData[counter] = workout.getCoumpound();
-            yAxisData[counter] = (int)workout.getWeight();
-
-            Log.i("INFO", "a " + axisData[counter]);
-            Log.i("INFO", "y " + yAxisData[counter]);
+            yAxisData[counter] = (int) workout.getWeight();
             counter++;
         }
-
-        Log.i("INFO", "a " + axisData);
-        Log.i("INFO", "y " + yAxisData);
 
         Line line = new Line(yAxisValues).setColor(Color.parseColor("#FF6E00"));
 
@@ -111,35 +147,63 @@ public class HomeActivity extends AppCompatActivity {
 
         lineChartView.setLineChartData(data);
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = 150;
+        viewport.top = 140;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
+    }
 
-        // BottomNavigation
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Boolean started = false;
+    public void drawTotalAmountChart() {
+        lineChartView = findViewById(R.id.chart);
 
-                switch (item.getItemId()) {
-                    case R.id.action_user:
-                        break;
-                    case R.id.action_workout:
-                        Intent workoutActivity = new Intent(HomeActivity.this, WorkoutActivity.class);
-                        workoutActivity.putExtras(bundle);
-                        startActivity(workoutActivity);
-                        started = true;
-                        break;
-                    case R.id.action_highscores:
-                        Intent highscoresActivity = new Intent(HomeActivity.this, HighscoresActivity.class);
-                        highscoresActivity.putExtras(bundle);
-                        startActivity(highscoresActivity);
-                        started = true;
-                        break;
-                }
-                return started;
-            }
-        });
+        List axisValues = new ArrayList();
+        List yAxisValues = new ArrayList();
+
+        List<Workout> workouts = db.getMaxWeightPerCompuntlift();
+
+        axisData = new String[workouts.size()];
+        yAxisData = new int[workouts.size()];
+        int counter = 0;
+
+        for (Workout workout : workouts) {
+            Log.i("INFO", "db: " + workout.getCoumpound() + " - " + workout.getWeight());
+
+            axisData[counter] = workout.getCoumpound();
+            yAxisData[counter] = (int) workout.getWeight();
+            counter++;
+        }
+
+        Line line = new Line(yAxisValues).setColor(Color.parseColor("#03A9F4"));
+
+        for (int i = 0; i < axisData.length; i++) {
+            axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
+        }
+
+        for (int i = 0; i < yAxisData.length; i++) {
+            yAxisValues.add(new PointValue(i, yAxisData[i]));
+        }
+
+        List lines = new ArrayList();
+        lines.add(line);
+
+        LineChartData data = new LineChartData();
+        data.setLines(lines);
+
+        Axis axis = new Axis();
+        axis.setValues(axisValues);
+        axis.setTextSize(16);
+        axis.setTextColor(Color.parseColor("#03A9F4"));
+        data.setAxisXBottom(axis);
+
+        Axis yAxis = new Axis();
+        yAxis.setName("Amount");
+        yAxis.setTextColor(Color.parseColor("#03A9F4"));
+        yAxis.setTextSize(16);
+        data.setAxisYLeft(yAxis);
+
+        lineChartView.setLineChartData(data);
+        Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
+        viewport.top = 140;
+        lineChartView.setMaximumViewport(viewport);
+        lineChartView.setCurrentViewport(viewport);
     }
 }

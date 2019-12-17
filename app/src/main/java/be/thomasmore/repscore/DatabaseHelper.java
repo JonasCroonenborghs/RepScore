@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "repscore";
 
     public DatabaseHelper(Context context) {
@@ -28,10 +28,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String CREATE_TABLE_WORKOUT = "CREATE TABLE workout (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "weight INT," +
+                "weight DEC," +
                 "date TEXT, " +
-                "compoundliftId INTEGER, " +
-                "FOREIGN KEY (compoundliftId) REFERENCES compoundlift(id))";
+                "compoundId INTEGER, " +
+                "FOREIGN KEY (compoundId) REFERENCES compoundlift(id))";
         db.execSQL(CREATE_TABLE_WORKOUT);
 
         insertCompoundLifts(db);
@@ -47,10 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     private void insertWorkouts(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (1, 50, '15/06/2019',1);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (2, 120,'15/06/2019',2);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (3, 110, '15/06/2019',3);");
-        db.execSQL("INSERT INTO workout (id, weight, date, compoundliftId) VALUES (4, 60,'15/06/2019',4);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundId) VALUES (1, 50, '15/06/2019',1);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundId) VALUES (2, 120,'15/06/2019',2);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundId) VALUES (3, 110, '15/06/2019',3);");
+        db.execSQL("INSERT INTO workout (id, weight, date, compoundId) VALUES (4, 60,'15/06/2019',4);");
     }
 
     @Override
@@ -63,13 +63,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public long insertWorkout(Workout workout){
+    public long insertWorkout(Workout workout) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put("weight", workout.getWeight());
         values.put("date", workout.getDate());
-        values.put("compoundliftId", workout.getCompoundId());
+        values.put("compoundId", workout.getCompoundId());
 
         long id = db.insert("workout", null, values);
         db.close();
@@ -171,6 +171,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnWorkout;
+    }
+
+    public List<Workout> getMaxWeightPerCompuntlift() {
+        List<Workout> list = new ArrayList<Workout>();
+
+        String selectQuery = "SELECT *, MAX(weight) as maxWeight FROM workout GROUP BY compoundId";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Workout workout = new Workout(cursor.getLong(0),
+                        cursor.getDouble(1), cursor.getString(2),
+                        cursor.getLong(3));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift compoundLift : compoundLifts) {
+                    if (compoundLift.getId() == workout.getCompoundId()) {
+                        workout.setCoumpound(compoundLift.getName());
+                    }
+                }
+
+                list.add(workout);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return list;
     }
 
     public int getCountCompoundLifts() {

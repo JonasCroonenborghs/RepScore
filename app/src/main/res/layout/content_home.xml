@@ -14,8 +14,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@drawable/border_shadow"
-        android:gravity="center"
         android:orientation="vertical"
+        android:padding="10dp"
         tools:ignore="MissingConstraints">
 
         <ImageView
@@ -29,27 +29,39 @@
             android:id="@+id/textViewUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/textViewTotalWorkouts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
+            android:layout_gravity="center"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewLastWorkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
             android:textSize="20sp" />
 
         <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/chart"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="275dp" />
+
+        <Switch
+            android:id="@+id/switchChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:switchMinWidth="70dp"
+            android:text="Swow chart max weight or total amounts"
+            android:textOff="Show total amounts"
+            android:textOn="Show max weight" />
 
     </LinearLayout>
 
