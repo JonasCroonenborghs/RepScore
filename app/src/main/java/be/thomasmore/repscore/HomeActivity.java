@@ -3,7 +3,6 @@ package be.thomasmore.repscore;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -105,7 +104,7 @@ public class HomeActivity extends AppCompatActivity {
         List axisValues = new ArrayList();
         List yAxisValues = new ArrayList();
 
-        List<Workout> workouts = db.getWorkouts();
+        List<Workout> workouts = db.getMaxWeightPerCompuntlift();
 
         axisData = new String[workouts.size()];
         yAxisData = new int[workouts.size()];
@@ -158,17 +157,15 @@ public class HomeActivity extends AppCompatActivity {
         List axisValues = new ArrayList();
         List yAxisValues = new ArrayList();
 
-        List<Workout> workouts = db.getMaxWeightPerCompuntlift();
+        List<CompoundLift> compoundLifts = db.getTotalAmountPerCompuntlift();
 
-        axisData = new String[workouts.size()];
-        yAxisData = new int[workouts.size()];
+        axisData = new String[compoundLifts.size()];
+        yAxisData = new int[compoundLifts.size()];
         int counter = 0;
 
-        for (Workout workout : workouts) {
-            Log.i("INFO", "db: " + workout.getCoumpound() + " - " + workout.getWeight());
-
-            axisData[counter] = workout.getCoumpound();
-            yAxisData[counter] = (int) workout.getWeight();
+        for (CompoundLift compoundLift : compoundLifts) {
+            axisData[counter] = compoundLift.getName();
+            yAxisData[counter] = (int) compoundLift.getTotalAmounts();
             counter++;
         }
 
@@ -202,7 +199,7 @@ public class HomeActivity extends AppCompatActivity {
 
         lineChartView.setLineChartData(data);
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = 140;
+        viewport.top = counter;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
     }

@@ -204,6 +204,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public List<CompoundLift> getTotalAmountPerCompuntlift() {
+        List<CompoundLift> list = new ArrayList<CompoundLift>();
+
+
+        String selectQuery = "SELECT compoundId, COUNT(*) FROM workout GROUP BY compoundId";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CompoundLift compoundLift = new CompoundLift(cursor.getLong(0), cursor.getLong(1));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift c : compoundLifts) {
+                    if (c.getId() == compoundLift.getId()) {
+                        compoundLift.setName(c.getName());
+                    }
+                }
+
+                list.add(compoundLift);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return list;
+    }
+
     public int getCountCompoundLifts() {
         String selectQuery = "SELECT  * FROM compoundlift";
 

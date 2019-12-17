@@ -42,9 +42,8 @@
             android:id="@+id/linearLayoutExercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:background="@drawable/border_shadow"
-            android:gravity="center"
             android:orientation="vertical"
             android:visibility="invisible">
 
