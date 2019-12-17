@@ -35,10 +35,6 @@ public class HighscoresActivity extends AppCompatActivity {
 
         bundle.putString("name", getIntent().getExtras().getString("name"));
 
-        Spinner dropdown = findViewById(R.id.spinner2);
-        String[] items = new String[]{"Choose a exercise", "Bench Press", "Deadlift", "Squat", "Military press"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
 
         setTitle("Highscores");
 
@@ -90,7 +86,7 @@ public class HighscoresActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parentView,
                                             View childView, int position, long id) {
-                        toon(workouts.get(position).getDate());
+                        toon(workouts.get(position).toString());
                     }
                 });
     }

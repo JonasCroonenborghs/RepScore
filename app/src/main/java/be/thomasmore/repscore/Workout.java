@@ -22,7 +22,13 @@ public class Workout {
 
     @Override
     public String toString() {
-        return date;
+        return "Workout{" +
+                "id=" + id +
+                ", weight=" + weight +
+                ", date='" + date + '\'' +
+                ", compoundId=" + compoundId +
+                ", coumpound='" + coumpound + '\'' +
+                '}';
     }
 
     public long getId() {

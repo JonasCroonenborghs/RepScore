@@ -80,7 +80,7 @@ s
             android:id="@+id/buttonAdd"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="Add 1 RM to your workouts"
+            android:text="@string/add_1_rm_to_your_workouts"
             android:padding="2dp"
             android:onClick="buttonAdd_onClick"
 
