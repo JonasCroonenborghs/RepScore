@@ -5,15 +5,22 @@ public class CompoundLift {
     private String name;
     private String description;
 
+    private long totalAmounts;
+
     public CompoundLift(long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
+    public CompoundLift(long id, long totalAmounts) {
+        this.id = id;
+        this.totalAmounts = totalAmounts;
+    }
+
     public CompoundLift() {
     }
-    
+
     public long getId() {
         return id;
     }
@@ -36,6 +43,14 @@ public class CompoundLift {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getTotalAmounts() {
+        return totalAmounts;
+    }
+
+    public void setTotalAmounts(long totalAmounts) {
+        this.totalAmounts = totalAmounts;
     }
 
     @Override
