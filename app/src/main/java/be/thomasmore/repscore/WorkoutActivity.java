@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,6 +68,8 @@ public class WorkoutActivity extends AppCompatActivity {
     private void readCompoundLifts() {
         List<CompoundLift> compoundLifts = db.getCompoundLifts();
 
+
+
         ArrayAdapter<CompoundLift> adapter = new ArrayAdapter<CompoundLift>(this,
                 android.R.layout.simple_spinner_item, compoundLifts);
 
@@ -74,7 +77,7 @@ public class WorkoutActivity extends AppCompatActivity {
         spinner = findViewById(R.id.listViewCompoundLifts);
 
         spinner.setAdapter(adapter);
-        spinner.setSelection(0);
+
     }
 
 
@@ -83,26 +86,29 @@ public class WorkoutActivity extends AppCompatActivity {
         String date = null;
         Long compoundId = null;
 
+
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
+        editTextWeight.setError(null);
         weight = Double.parseDouble(editTextWeight.getText().toString());
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
         date = String.valueOf(datePicker.getDayOfMonth()) + "/" + String.valueOf(datePicker.getMonth() + "/" + String.valueOf(datePicker.getYear()));
 
         Spinner editCompound = (Spinner) findViewById(R.id.listViewCompoundLifts);
-        compoundId = editCompound.getSelectedItemId();
+        compoundId = editCompound.getSelectedItemId()+1;
+
 
         Workout workout = new Workout();
 
         if (weight == 0) {
-            TextView textViewWeightError = (TextView) findViewById(R.id.textViewWeightError);
-            textViewWeightError.setVisibility(View.VISIBLE);
+
+            Toast.makeText(WorkoutActivity.this,"Fill in weight",Toast.LENGTH_SHORT).show();
         } else {
             workout.setWeight(weight);
             workout.setDate(date);
             workout.setCompoundId(compoundId);
             Log.i("INFO", "workout: " + workout);
-//        db.insertWorkout(workout);
+        db.insertWorkout(workout);
         }
     }
 }

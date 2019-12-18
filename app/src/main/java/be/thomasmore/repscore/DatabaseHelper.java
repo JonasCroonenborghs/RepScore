@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "repscore";
 
     public DatabaseHelper(Context context) {
@@ -39,10 +39,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void insertCompoundLifts(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (1, 'Bench Press', 'Do this if you want a BIG CHEST !!');");
-        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (2, 'Deadlift','D Lift Desc');");
-        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (3, 'Squat', 'SQUAT BITCH!');");
-        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (4, 'Military Press','Boulders for Shoulders');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (1, 'Bench Press', 'Compound Flat Chest Exercise');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (2, 'Deadlift','Deadlift Compound');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (3, 'Military Press','Compound Shoulder Exercise');");
+        db.execSQL("INSERT INTO compoundlift (id, name, description) VALUES (4, 'Squat', 'Compound leg Exercive');");
     }
 
 
@@ -62,7 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
+    //insert method
     public long insertWorkout(Workout workout) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -76,6 +76,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
 
     }
+
+
+    //update method
+    public boolean updateWorkout(Workout workout) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put("weight", workout.getWeight());
+        values.put("date", workout.getDate());
+        values.put("compoundId", workout.getCompoundId());
+
+
+        int numrows = db.update(
+                "workout",
+                values,
+                "id = ?",
+                new String[] { String.valueOf(workout.getId()) });
+
+        db.close();
+        return numrows > 0;
+    }
+
+    //delete method
+    public boolean deleteWorkout(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int numrows = db.delete(
+                "workout",
+                "id = ?",
+                new String[] { String.valueOf(id) });
+
+        db.close();
+        return numrows > 0;
+    }
+
+
 
     public List<CompoundLift> getCompoundLifts() {
         List<CompoundLift> lijst = new ArrayList<CompoundLift>();
