@@ -107,12 +107,13 @@ public class ExcerisesActivity extends AppCompatActivity {
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         final TextView textViewWaiting = (TextView) findViewById(R.id.textViewWaiting);
 
-        for (int i = 1; i <= 31; i++) {
-            progressBar.setVisibility(View.VISIBLE);
-            textViewWaiting.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        textViewWaiting.setVisibility(View.VISIBLE);
 
+        for (int i = 1; i <= 31; i++) {
             HttpReader httpReader = new HttpReader();
             final int pageCounter = i;
+
             httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
                 @Override
                 public void resultReady(String result) {
@@ -148,8 +149,10 @@ public class ExcerisesActivity extends AppCompatActivity {
                         JsonHelper jsonHelper = new JsonHelper();
                         ExerciseImage exerciseImage = jsonHelper.getExerciseImage(result, exerciseID);
 
-                        ImageView imageViewExerciseImage = (ImageView) findViewById(R.id.imageViewExerciseImage);
-                        Picasso.get().load(exerciseImage.getImage()).into(imageViewExerciseImage);
+                        if (exerciseImage.getImage() != null) {
+                            ImageView imageViewExerciseImage = (ImageView) findViewById(R.id.imageViewExerciseImage);
+                            Picasso.get().load(exerciseImage.getImage()).into(imageViewExerciseImage);
+                        }
                     }
                 }
             });
