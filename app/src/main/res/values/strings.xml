@@ -28,9 +28,10 @@
     <string name="image_exercise">Image of exercise</string>
     <string name="image_towel">Image of a towel</string>
     <string name="title_activity_update_delete_workout">UpdateDeleteWorkoutActivity</string>
-    <string name="text_change_chart">Swow chart max weight or total amounts</string>
+    <string name="text_change_chart">Show chart max weight or total amounts</string>
     <string name="text_show_total">Show total amounts</string>
     <string name="text_show_max">Show max weight</string>
     <string name="text_start_tracking">Start tracking your workout</string>
     <string name="text_show_exercises">Show different exercises</string>
+    <string name="text_go_back">Go to home</string>
 </resources>

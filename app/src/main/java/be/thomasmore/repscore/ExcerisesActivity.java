@@ -82,6 +82,10 @@ public class ExcerisesActivity extends AppCompatActivity {
         });
     }
 
+    public void btn_goBack_onClick(View view) {
+        onBackPressed();
+    }
+
     private void readMuscleGroups() {
         HttpReader httpReader = new HttpReader();
         httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
