@@ -55,23 +55,23 @@
                 android:id="@+id/listViewMuscleGroups"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/border_shadow"
                 android:divider="@color/orangeRed"
                 android:dividerHeight="1dp" />
         </LinearLayout>
-
 
         <ListView
             android:id="@+id/listViewExercises"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/border_shadow"
             android:divider="@color/orangeRed"
             android:dividerHeight="1dp" />
 
         <LinearLayout
             android:id="@+id/linearLayoutExercise"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_shadow"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="invisible">
 
@@ -84,21 +84,29 @@
                 android:padding="20dp"
                 android:src="@drawable/exercise_workout" />
 
-            <TextView
-                android:id="@+id/textViewExerciseName"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="20dp"
-                android:textSize="25sp" />
+                android:background="@drawable/border_shadow"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewExerciseDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="20dp"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/textViewExerciseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="20dp"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textViewExerciseDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="20dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
 
         </LinearLayout>
 

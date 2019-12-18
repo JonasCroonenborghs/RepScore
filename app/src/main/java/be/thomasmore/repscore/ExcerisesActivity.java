@@ -47,6 +47,7 @@ public class ExcerisesActivity extends AppCompatActivity {
                 readExercises(position);
                 ImageView imageViewMuscleGroups = (ImageView) findViewById(R.id.imageViewMuscleGroups);
                 imageViewMuscleGroups.setVisibility(View.INVISIBLE);
+                listViewMuscleGroups.setVisibility(View.INVISIBLE);
             }
         });
 
