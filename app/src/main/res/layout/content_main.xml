@@ -22,6 +22,7 @@
             android:id="@+id/logo"
             android:layout_width="350dp"
             android:layout_height="200dp"
+            android:contentDescription="@string/image_logo"
             android:src="@drawable/logo_black" />
 
         <LinearLayout
@@ -38,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="125dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image_exercise"
+                android:contentDescription="@string/image_author_Jonas"
                 android:src="@drawable/jonas" />
 
             <TextView
@@ -52,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="125dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/image_exercise"
+                android:contentDescription="@string/image_author_Jasper"
                 android:src="@drawable/jasper" />
 
             <TextView
