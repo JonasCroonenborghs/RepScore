@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -96,6 +97,11 @@ public class HomeActivity extends AppCompatActivity {
                 return started;
             }
         });
+    }
+
+    public void btn_exercises_onClick(View v) {
+        Intent exercisesActivity = new Intent(this, ExcerisesActivity.class);
+        startActivity(exercisesActivity);
     }
 
     public void drawMaxWeightChart() {
