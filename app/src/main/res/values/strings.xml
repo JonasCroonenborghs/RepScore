@@ -15,6 +15,8 @@
     <string name="fb_login_protocol_scheme">fb458578941458032</string>
 
     <string name="title_activity_user">UserActivity</string>
+    <string name="text_go_homescreen">Go to homescreen</string>
+    <string name="text_ready_for_workout">Ready for your workout? \n Log in met FaceBook!</string>
     <string name="text_add_1RM">Add 1 RM to your workouts</string>
     <string name="text_choose_musclegroup">Choose a musclegroup</string>
     <string name="text_loading">Loading exercises, this might take a while...</string>
@@ -24,5 +26,6 @@
     <string name="image_user">Image of a user</string>
     <string name="image_musclegroups">Image of musclegroups</string>
     <string name="image_exercise">Image of exercise</string>
+    <string name="image_towel">Image of a towel</string>
     <string name="title_activity_update_delete_workout">UpdateDeleteWorkoutActivity</string>
 </resources>

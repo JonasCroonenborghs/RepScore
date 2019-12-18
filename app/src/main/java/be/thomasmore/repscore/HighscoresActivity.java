@@ -17,7 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 public class HighscoresActivity extends AppCompatActivity {
-
     private Bundle bundle = new Bundle();
     private DatabaseHelper db;
     private ArrayList<Workout> workoutArrayList;
@@ -28,38 +27,30 @@ public class HighscoresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscores);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        setTitle("1 Rep Maxes");
         bundle.putString("name", getIntent().getExtras().getString("name"));
 
-
-        setTitle("1 Rep Maxes");
+        db = new DatabaseHelper(this);
+        workoutArrayList = db.getAllWorkouts();
 
         listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
 
-        db = new DatabaseHelper(this);
-
-        workoutArrayList = db.getAllWorkouts();
-
-        customAdapter = new CustomAdapter(this,workoutArrayList);
+        customAdapter = new CustomAdapter(this, workoutArrayList);
         listViewWorkouts.setAdapter(customAdapter);
 
         listViewWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(HighscoresActivity.this,UpdateDeleteWorkoutActivity.class);
-                intent.putExtra("workout",  workoutArrayList.get(position));
+                Log.i("INFO", "workout: " + workoutArrayList.get(position));
+
+                Intent intent = new Intent(HighscoresActivity.this, UpdateDeleteWorkoutActivity.class);
+                intent.putExtra("workout", workoutArrayList.get(position));
 
                 startActivity(intent);
             }
         });
-
-
-
-
-
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -89,7 +80,7 @@ public class HighscoresActivity extends AppCompatActivity {
     }
 
 //    private void readWorkouts() {
-      //  final List<Workout> workouts = db.getWorkouts();
+    //  final List<Workout> workouts = db.getWorkouts();
 
 
 //        listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
