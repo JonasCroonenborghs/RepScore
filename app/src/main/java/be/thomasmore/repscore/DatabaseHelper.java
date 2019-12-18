@@ -136,10 +136,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public List<Workout> getWorkouts() {
-        List<Workout> lijst = new ArrayList<Workout>();
+//    public List<Workout> getWorkouts() {
+//        List<Workout> lijst = new ArrayList<Workout>();
+//
+//        String selectQuery = "SELECT  * FROM workout";
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                Workout workout = new Workout(cursor.getLong(0),
+//                        cursor.getDouble(1), cursor.getString(2),
+//                        cursor.getLong(3));
+//
+//                List<CompoundLift> compoundLifts = getCompoundLifts();
+//
+//                for (CompoundLift compoundLift : compoundLifts) {
+//                    if (compoundLift.getId() == workout.getCompoundId()) {
+//                        workout.setCoumpound(compoundLift.getName());
+//                    }
+//                }
+//
+//                lijst.add(workout);
+//            } while (cursor.moveToNext());
+//        }
+//
+//        cursor.close();
+//        db.close();
+//        return lijst;
+//    }
 
-        String selectQuery = "SELECT  * FROM workout";
+
+
+    public ArrayList<Workout> getAllWorkouts() {
+        ArrayList<Workout> userWorkoutArrayList = new ArrayList<Workout>();
+          String selectQuery = "SELECT  * FROM workout ORDER BY compoundId";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -158,13 +190,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     }
                 }
 
-                lijst.add(workout);
+                userWorkoutArrayList.add(workout);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
         db.close();
-        return lijst;
+        return userWorkoutArrayList;
     }
 
     public int getCountWorkouts() {

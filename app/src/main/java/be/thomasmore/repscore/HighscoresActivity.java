@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,12 +20,15 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HighscoresActivity extends AppCompatActivity {
     private Bundle bundle = new Bundle();
     private DatabaseHelper db;
-
+    private ArrayList<Workout> workoutArrayList;
+    private ListView listViewWorkouts;
+    private CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,24 +75,34 @@ public class HighscoresActivity extends AppCompatActivity {
         Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
     private void readWorkouts() {
-        final List<Workout> workouts = db.getWorkouts();
+      //  final List<Workout> workouts = db.getWorkouts();
 
-        ArrayAdapter<Workout> adapter =
-                new ArrayAdapter<Workout>(this,
-                        android.R.layout.simple_list_item_1, workouts);
 
-        final ListView listViewWorkouts =
-                (ListView) findViewById(R.id.listViewWorkouts);
-        listViewWorkouts.setAdapter(adapter);
+        listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
 
-        listViewWorkouts.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parentView,
-                                            View childView, int position, long id) {
-                        toon(workouts.get(position).toString());
-                    }
-                });
+
+        workoutArrayList = db.getAllWorkouts();
+
+        customAdapter = new CustomAdapter(this,workoutArrayList);
+        listViewWorkouts.setAdapter(customAdapter);
+
+//        final ArrayAdapter<Workout> adapter =
+//                new ArrayAdapter<Workout>(this,
+//                        android.R.layout.simple_list_item_1, workoutArrayList);
+//
+//        final ListView listViewWorkouts =
+//                (ListView) findViewById(R.id.listViewWorkouts);
+//        listViewWorkouts.setAdapter(adapter);
+
+
+        listViewWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(HighscoresActivity.this,UpdateDeleteWorkoutActivity.class);
+                intent.putExtra("workout", (Parcelable) workoutArrayList.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
 }
