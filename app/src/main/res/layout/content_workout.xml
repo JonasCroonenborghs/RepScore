@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
             android:onClick="buttonAddWorkout_onClick"
-            android:text="@string/add_1_rm_to_your_workouts" />
+            android:text="@string/text_add_1RM" />
 
     </LinearLayout>
 

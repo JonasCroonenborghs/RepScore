@@ -1,49 +1,23 @@
 package be.thomasmore.repscore;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import android.widget.AdapterView.OnItemClickListener;
 
 public class ExcerisesActivity extends AppCompatActivity {
 
@@ -71,6 +45,8 @@ public class ExcerisesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listViewMuscleGroups.setAdapter(null);
                 readExercises(position);
+                ImageView imageViewMuscleGroups = (ImageView) findViewById(R.id.imageViewMuscleGroups);
+                imageViewMuscleGroups.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -129,9 +105,11 @@ public class ExcerisesActivity extends AppCompatActivity {
     private void readExercises(final long category) {
         final List<String> exerciseNames = new ArrayList<>();
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        final TextView textViewWaiting = (TextView) findViewById(R.id.textViewWaiting);
 
         for (int i = 1; i <= 31; i++) {
             progressBar.setVisibility(View.VISIBLE);
+            textViewWaiting.setVisibility(View.VISIBLE);
 
             HttpReader httpReader = new HttpReader();
             final int pageCounter = i;
@@ -148,6 +126,7 @@ public class ExcerisesActivity extends AppCompatActivity {
 
                     if (pageCounter == 31) {
                         progressBar.setVisibility(View.INVISIBLE);
+                        textViewWaiting.setVisibility(View.INVISIBLE);
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ExcerisesActivity.this, android.R.layout.simple_list_item_1, exerciseNames);
                         ListView listViewExercises = (ListView) findViewById(R.id.listViewExercises);
                         listViewExercises.setAdapter(adapter);
