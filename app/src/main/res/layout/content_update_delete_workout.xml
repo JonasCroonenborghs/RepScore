@@ -9,7 +9,6 @@
     tools:showIn="@layout/activity_update_delete_workout">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,8 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:visibility="invisible"
-            android:textColor="#FF0000"/>
+            android:textColor="#FF0000"
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/editTextWeight"
@@ -75,14 +74,12 @@
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
 
-<!--        <Button-->
-<!--            android:id="@+id/buttondUpdate"-->
-<!--            android:layout_width="130dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/rounded_button"-->
-<!--            android:text="@string/text_add_1RM" />-->
-
-
+        <!--        <Button-->
+        <!--            android:id="@+id/buttondUpdate"-->
+        <!--            android:layout_width="130dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/rounded_button"-->
+        <!--            android:text="@string/text_add_1RM" />-->
 
         <Button
             android:id="@+id/buttondDelete"

@@ -2,7 +2,6 @@ package be.thomasmore.repscore;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,12 +42,13 @@ public class HighscoresActivity extends AppCompatActivity {
         listViewWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("INFO", "workout: " + workoutArrayList.get(position));
+                Intent UpdateDeleteWorkoutActivity = new Intent(HighscoresActivity.this, UpdateDeleteWorkoutActivity.class);
 
-                Intent intent = new Intent(HighscoresActivity.this, UpdateDeleteWorkoutActivity.class);
-                intent.putExtra("workout", workoutArrayList.get(position));
+                long workoutId = workoutArrayList.get(position).getId();
 
-                startActivity(intent);
+                bundle.putLong("workoutId", workoutId);
+                UpdateDeleteWorkoutActivity.putExtras(bundle);
+                startActivity(UpdateDeleteWorkoutActivity);
             }
         });
 

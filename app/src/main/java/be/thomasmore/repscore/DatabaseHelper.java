@@ -93,7 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "workout",
                 values,
                 "id = ?",
-                new String[] { String.valueOf(workout.getId()) });
+                new String[]{String.valueOf(workout.getId())});
 
         db.close();
         return numrows > 0;
@@ -106,12 +106,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int numrows = db.delete(
                 "workout",
                 "id = ?",
-                new String[] { String.valueOf(id) });
+                new String[]{String.valueOf(id)});
 
         db.close();
         return numrows > 0;
     }
-
 
 
     public List<CompoundLift> getCompoundLifts() {
@@ -167,11 +166,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        return lijst;
 //    }
 
+    public Workout getWorkoutById(long workoutId) {
+        Workout workout = null;
+        String selectQuery = "SELECT  * FROM workout WHERE id = " + workoutId;
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                workout = new Workout(cursor.getLong(0),
+                        cursor.getDouble(1), cursor.getString(2),
+                        cursor.getLong(3));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift compoundLift : compoundLifts) {
+                    if (compoundLift.getId() == workout.getCompoundId()) {
+                        workout.setCoumpound(compoundLift.getName());
+                    }
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return workout;
+    }
 
     public ArrayList<Workout> getAllWorkouts() {
         ArrayList<Workout> userWorkoutArrayList = new ArrayList<Workout>();
-          String selectQuery = "SELECT  * FROM workout ORDER BY compoundId";
+        String selectQuery = "SELECT  * FROM workout ORDER BY compoundId";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
