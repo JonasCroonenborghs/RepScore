@@ -2,6 +2,7 @@ package be.thomasmore.repscore;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,7 +89,6 @@ public class WorkoutActivity extends AppCompatActivity {
 
 
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
-        editTextWeight.setError(null);
         weight = Double.parseDouble(editTextWeight.getText().toString());
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
@@ -100,7 +100,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
         Workout workout = new Workout();
 
-        if (weight == 0) {
+        if (TextUtils.isEmpty(editTextWeight.toString())) {
 
             Toast.makeText(WorkoutActivity.this,"Fill in weight",Toast.LENGTH_SHORT).show();
         } else {
@@ -108,6 +108,8 @@ public class WorkoutActivity extends AppCompatActivity {
             workout.setDate(date);
             workout.setCompoundId(compoundId);
             Log.i("INFO", "workout: " + workout);
+
+            Toast.makeText(WorkoutActivity.this, "Added 1RM Succesfully ! ",Toast.LENGTH_SHORT).show();
         db.insertWorkout(workout);
         }
     }

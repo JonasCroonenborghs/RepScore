@@ -28,4 +28,6 @@
     <string name="image_exercise">Image of exercise</string>
     <string name="image_towel">Image of a towel</string>
     <string name="title_activity_update_delete_workout">UpdateDeleteWorkoutActivity</string>
+    <string name="change">Change</string>
+    <string name="delete">Delete</string>
 </resources>
