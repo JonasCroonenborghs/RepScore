@@ -2,28 +2,22 @@ package be.thomasmore.repscore;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Parcelable;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HighscoresActivity extends AppCompatActivity {
+
     private Bundle bundle = new Bundle();
     private DatabaseHelper db;
     private ArrayList<Workout> workoutArrayList;
@@ -34,16 +28,38 @@ public class HighscoresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscores);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         bundle.putString("name", getIntent().getExtras().getString("name"));
 
 
-        setTitle("Highscores");
+        setTitle("1 Rep Maxes");
+
+        listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
 
         db = new DatabaseHelper(this);
-        readWorkouts();
+
+        workoutArrayList = db.getAllWorkouts();
+
+        customAdapter = new CustomAdapter(this,workoutArrayList);
+        listViewWorkouts.setAdapter(customAdapter);
+
+        listViewWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(HighscoresActivity.this,UpdateDeleteWorkoutActivity.class);
+                intent.putExtra("workout",  workoutArrayList.get(position));
+
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,20 +87,18 @@ public class HighscoresActivity extends AppCompatActivity {
             }
         });
     }
-    private void toon(String tekst) {
-        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
-    }
-    private void readWorkouts() {
+
+//    private void readWorkouts() {
       //  final List<Workout> workouts = db.getWorkouts();
 
 
-        listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
-
-
-        workoutArrayList = db.getAllWorkouts();
-
-        customAdapter = new CustomAdapter(this,workoutArrayList);
-        listViewWorkouts.setAdapter(customAdapter);
+//        listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
+//
+//
+//        workoutArrayList = db.getAllWorkouts();
+//
+//        customAdapter = new CustomAdapter(this,workoutArrayList);
+//        listViewWorkouts.setAdapter(customAdapter);
 
 //        final ArrayAdapter<Workout> adapter =
 //                new ArrayAdapter<Workout>(this,
@@ -95,14 +109,14 @@ public class HighscoresActivity extends AppCompatActivity {
 //        listViewWorkouts.setAdapter(adapter);
 
 
-        listViewWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(HighscoresActivity.this,UpdateDeleteWorkoutActivity.class);
-                intent.putExtra("workout", (Parcelable) workoutArrayList.get(position));
-                startActivity(intent);
-            }
-        });
-    }
+//        listViewWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(HighscoresActivity.this,UpdateDeleteWorkoutActivity.class);
+//                intent.putExtra("workout", workoutArrayList.get(position));
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
 }
