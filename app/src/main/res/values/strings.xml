@@ -33,7 +33,8 @@
     <string name="text_show_max">Show max weight</string>
     <string name="text_start_tracking">Start tracking your workout</string>
     <string name="text_show_exercises">Show different exercises</string>
-    <string name="text_go_back">Go to home</string>
     <string name="change">Change</string>
     <string name="delete">Delete</string>
+    <string name="text_go_back">Go back</string>
+    <string name="text_go_home">Go to home</string>
 </resources>

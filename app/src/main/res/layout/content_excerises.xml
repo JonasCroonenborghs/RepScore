@@ -15,29 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/textViewWaiting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_loading"
-                android:visibility="invisible" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
+            android:id="@+id/linearLayoutMuscleGroups"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -60,6 +38,29 @@
                 android:dividerHeight="1dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayoutWaitingScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textViewWaiting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_loading"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
         <ListView
             android:id="@+id/listViewExercises"
             android:layout_width="fill_parent"
@@ -69,7 +70,7 @@
             android:dividerHeight="1dp" />
 
         <LinearLayout
-            android:id="@+id/linearLayoutExercise"
+            android:id="@+id/linearLayoutExerciseInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -84,40 +85,55 @@
                 android:padding="20dp"
                 android:src="@drawable/exercise_workout" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_shadow"
-                android:orientation="vertical">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textViewExerciseName"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="20dp"
-                    android:textSize="25sp" />
+                    android:background="@drawable/border_shadow"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textViewExerciseDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="20dp"
-                    android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/textViewExerciseName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="20dp"
+                        android:textSize="25sp" />
 
-                <Button
-                    android:id="@+id/btn_goBack"
-                    android:layout_width="200dp"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/rounded_button"
-                    android:onClick="btn_goBack_onClick"
-                    android:text="@string/text_go_back"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/textViewExerciseDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="20dp"
+                        android:textSize="20sp" />
 
+                    <Button
+                        android:id="@+id/buttonGoBack"
+                        android:layout_width="200dp"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="buttonGoBack_onClick"
+                        android:text="@string/text_go_back"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/buttonGoHome"
+                        android:layout_width="200dp"
+                        android:layout_height="65dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="buttonGoHome_onClick"
+                        android:text="@string/text_go_home"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 

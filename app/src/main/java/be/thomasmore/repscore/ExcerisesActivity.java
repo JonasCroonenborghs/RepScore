@@ -43,11 +43,9 @@ public class ExcerisesActivity extends AppCompatActivity {
         listViewMuscleGroups.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listViewMuscleGroups.setAdapter(null);
                 readExercises(position);
-                ImageView imageViewMuscleGroups = (ImageView) findViewById(R.id.imageViewMuscleGroups);
-                imageViewMuscleGroups.setVisibility(View.INVISIBLE);
-                listViewMuscleGroups.setVisibility(View.INVISIBLE);
+                LinearLayout linearLayoutMuscleGroups = (LinearLayout) findViewById(R.id.linearLayoutMuscleGroups);
+                linearLayoutMuscleGroups.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -55,21 +53,25 @@ public class ExcerisesActivity extends AppCompatActivity {
         listViewExercises.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                listViewExercises.setAdapter(null);
-
-                LinearLayout linearLayoutExercise = (LinearLayout) findViewById(R.id.linearLayoutExercise);
-                linearLayoutExercise.setVisibility(View.VISIBLE);
+                listViewExercises.setVisibility(View.INVISIBLE);
+                LinearLayout linearLayoutExerciseInfo = (LinearLayout) findViewById(R.id.linearLayoutExerciseInfo);
+                linearLayoutExerciseInfo.setVisibility(View.VISIBLE);
 
                 exerciseID = exercisesList.get(position).getId();
                 exerciseName = exercisesList.get(position).getName();
                 exerciseDescription = exercisesList.get(position).getDescription();
 
+                // Remove html-tags from data
                 exerciseDescription = exerciseDescription.replaceAll("<p>", "");
                 exerciseDescription = exerciseDescription.replaceAll("</p>", "");
                 exerciseDescription = exerciseDescription.replaceAll("<ol>", "");
                 exerciseDescription = exerciseDescription.replaceAll("</ol>", "");
+                exerciseDescription = exerciseDescription.replaceAll("<ul>", "");
+                exerciseDescription = exerciseDescription.replaceAll("</ul>", "");
                 exerciseDescription = exerciseDescription.replaceAll("<li>", "");
                 exerciseDescription = exerciseDescription.replaceAll("</li>", "");
+                exerciseDescription = exerciseDescription.replaceAll("<em>", "");
+                exerciseDescription = exerciseDescription.replaceAll("</em>", "");
 
                 TextView textViewExerciseName = (TextView) findViewById(R.id.textViewExerciseName);
                 textViewExerciseName.setText(exerciseName);
@@ -82,7 +84,14 @@ public class ExcerisesActivity extends AppCompatActivity {
         });
     }
 
-    public void btn_goBack_onClick(View view) {
+    public void buttonGoBack_onClick(View view) {
+        LinearLayout linearLayoutExerciseInfo = (LinearLayout) findViewById(R.id.linearLayoutExerciseInfo);
+        linearLayoutExerciseInfo.setVisibility(View.INVISIBLE);
+        ListView listViewExercises = (ListView) findViewById(R.id.listViewExercises);
+        listViewExercises.setVisibility(View.VISIBLE);
+    }
+
+    public void buttonGoHome_onClick(View view) {
         onBackPressed();
     }
 
@@ -150,14 +159,12 @@ public class ExcerisesActivity extends AppCompatActivity {
             httpReader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
                 @Override
                 public void resultReady(String result) {
-                    if (pageCounter == 11) {
-                        JsonHelper jsonHelper = new JsonHelper();
-                        ExerciseImage exerciseImage = jsonHelper.getExerciseImage(result, exerciseID);
+                    JsonHelper jsonHelper = new JsonHelper();
+                    ExerciseImage exerciseImage = jsonHelper.getExerciseImage(result, exerciseID);
+                    ImageView imageViewExerciseImage = (ImageView) findViewById(R.id.imageViewExerciseImage);
 
-                        if (exerciseImage.getImage() != null) {
-                            ImageView imageViewExerciseImage = (ImageView) findViewById(R.id.imageViewExerciseImage);
-                            Picasso.get().load(exerciseImage.getImage()).into(imageViewExerciseImage);
-                        }
+                    if (exerciseImage.getImage() != null) {
+                        Picasso.get().load(exerciseImage.getImage()).into(imageViewExerciseImage);
                     }
                 }
             });
