@@ -62,7 +62,94 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //insert method
+    public Workout getWorkoutById(long workoutId) {
+        Workout workout = null;
+        String selectQuery = "SELECT  * FROM workout WHERE id = " + workoutId;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                workout = new Workout(cursor.getLong(0),
+                        cursor.getDouble(1), cursor.getString(2),
+                        cursor.getLong(3));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift compoundLift : compoundLifts) {
+                    if (compoundLift.getId() == workout.getCompoundId()) {
+                        workout.setCoumpound(compoundLift.getName());
+                    }
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return workout;
+    }
+
+    public ArrayList<Workout> getAllWorkouts() {
+        ArrayList<Workout> userWorkoutArrayList = new ArrayList<Workout>();
+        String selectQuery = "SELECT  * FROM workout ORDER BY id DESC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Workout workout = new Workout(cursor.getLong(0),
+                        cursor.getDouble(1), cursor.getString(2),
+                        cursor.getLong(3));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift compoundLift : compoundLifts) {
+                    if (compoundLift.getId() == workout.getCompoundId()) {
+                        workout.setCoumpound(compoundLift.getName());
+                    }
+                }
+
+                userWorkoutArrayList.add(workout);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return userWorkoutArrayList;
+    }
+
+    public ArrayList<Workout> getAllWorkoutsByFilter(long compoundId) {
+        ArrayList<Workout> userWorkoutArrayList = new ArrayList<Workout>();
+        String selectQuery = "SELECT  * FROM workout WHERE compoundId = " + compoundId + " ORDER BY id DESC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Workout workout = new Workout(cursor.getLong(0),
+                        cursor.getDouble(1), cursor.getString(2),
+                        cursor.getLong(3));
+
+                List<CompoundLift> compoundLifts = getCompoundLifts();
+
+                for (CompoundLift compoundLift : compoundLifts) {
+                    if (compoundLift.getId() == workout.getCompoundId()) {
+                        workout.setCoumpound(compoundLift.getName());
+                    }
+                }
+
+                userWorkoutArrayList.add(workout);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return userWorkoutArrayList;
+    }
+
     public long insertWorkout(Workout workout) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -74,9 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long id = db.insert("workout", null, values);
         db.close();
         return id;
-
     }
-
 
     public boolean updateWorkout(long id, Workout workout) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -108,7 +193,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return numrows > 0;
     }
 
-
     public List<CompoundLift> getCompoundLifts() {
         List<CompoundLift> lijst = new ArrayList<CompoundLift>();
 
@@ -128,96 +212,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return lijst;
-    }
-
-
-//    public List<Workout> getWorkouts() {
-//        List<Workout> lijst = new ArrayList<Workout>();
-//
-//        String selectQuery = "SELECT  * FROM workout";
-//
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                Workout workout = new Workout(cursor.getLong(0),
-//                        cursor.getDouble(1), cursor.getString(2),
-//                        cursor.getLong(3));
-//
-//                List<CompoundLift> compoundLifts = getCompoundLifts();
-//
-//                for (CompoundLift compoundLift : compoundLifts) {
-//                    if (compoundLift.getId() == workout.getCompoundId()) {
-//                        workout.setCoumpound(compoundLift.getName());
-//                    }
-//                }
-//
-//                lijst.add(workout);
-//            } while (cursor.moveToNext());
-//        }
-//
-//        cursor.close();
-//        db.close();
-//        return lijst;
-//    }
-
-    public Workout getWorkoutById(long workoutId) {
-        Workout workout = null;
-        String selectQuery = "SELECT  * FROM workout WHERE id = " + workoutId;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                workout = new Workout(cursor.getLong(0),
-                        cursor.getDouble(1), cursor.getString(2),
-                        cursor.getLong(3));
-
-                List<CompoundLift> compoundLifts = getCompoundLifts();
-
-                for (CompoundLift compoundLift : compoundLifts) {
-                    if (compoundLift.getId() == workout.getCompoundId()) {
-                        workout.setCoumpound(compoundLift.getName());
-                    }
-                }
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return workout;
-    }
-
-    public ArrayList<Workout> getAllWorkouts() {
-        ArrayList<Workout> userWorkoutArrayList = new ArrayList<Workout>();
-        String selectQuery = "SELECT  * FROM workout ORDER BY compoundId";
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                Workout workout = new Workout(cursor.getLong(0),
-                        cursor.getDouble(1), cursor.getString(2),
-                        cursor.getLong(3));
-
-                List<CompoundLift> compoundLifts = getCompoundLifts();
-
-                for (CompoundLift compoundLift : compoundLifts) {
-                    if (compoundLift.getId() == workout.getCompoundId()) {
-                        workout.setCoumpound(compoundLift.getName());
-                    }
-                }
-
-                userWorkoutArrayList.add(workout);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return userWorkoutArrayList;
     }
 
     public int getCountWorkouts() {

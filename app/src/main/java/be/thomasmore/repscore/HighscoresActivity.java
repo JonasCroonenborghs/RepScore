@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,6 @@ public class HighscoresActivity extends AppCompatActivity {
         workoutArrayList = db.getAllWorkouts();
 
         listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
-
         customAdapter = new CustomAdapter(this, workoutArrayList);
         listViewWorkouts.setAdapter(customAdapter);
 
@@ -80,35 +80,17 @@ public class HighscoresActivity extends AppCompatActivity {
         });
     }
 
-//    private void readWorkouts() {
-    //  final List<Workout> workouts = db.getWorkouts();
+    public void buttonFilter_onClick(View view) {
+        RadioGroup radioGroupCompound = (RadioGroup) findViewById(R.id.radioGroupCompound);
+        long workoutId = radioGroupCompound.getCheckedRadioButtonId();
 
+        if (workoutId != -1) {
+            db = new DatabaseHelper(this);
+            workoutArrayList = db.getAllWorkoutsByFilter(workoutId);
 
-//        listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
-//
-//
-//        workoutArrayList = db.getAllWorkouts();
-//
-//        customAdapter = new CustomAdapter(this,workoutArrayList);
-//        listViewWorkouts.setAdapter(customAdapter);
-
-//        final ArrayAdapter<Workout> adapter =
-//                new ArrayAdapter<Workout>(this,
-//                        android.R.layout.simple_list_item_1, workoutArrayList);
-//
-//        final ListView listViewWorkouts =
-//                (ListView) findViewById(R.id.listViewWorkouts);
-//        listViewWorkouts.setAdapter(adapter);
-
-
-//        listViewWorkouts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(HighscoresActivity.this,UpdateDeleteWorkoutActivity.class);
-//                intent.putExtra("workout", workoutArrayList.get(position));
-//                startActivity(intent);
-//            }
-//        });
-//    }
-
+            listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
+            customAdapter = new CustomAdapter(this, workoutArrayList);
+            listViewWorkouts.setAdapter(customAdapter);
+        }
+    }
 }
