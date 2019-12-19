@@ -78,8 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //update method
-    public boolean updateWorkout(Workout workout) {
+    public boolean updateWorkout(long id, Workout workout) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -88,18 +87,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("date", workout.getDate());
         values.put("compoundId", workout.getCompoundId());
 
-
         int numrows = db.update(
                 "workout",
                 values,
                 "id = ?",
                 new String[]{String.valueOf(workout.getId())});
-
         db.close();
         return numrows > 0;
     }
 
-    //delete method
     public boolean deleteWorkout(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
 

@@ -2,23 +2,28 @@ package be.thomasmore.repscore;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
+import java.util.List;
 
+public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
+    private Workout workout = null;
+    private Long workoutId = null;
+    private String date = null;
     private EditText editWeight;
     private Spinner spinner;
-    private Button buttonUpdate, buttonDelete;
     private DatabaseHelper db;
-    private String date = null;
+    private Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,51 +31,81 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_delete_workout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent = getIntent();
-        final Long workoutId = getIntent().getExtras().getLong("workoutId");
+        setTitle("Update workout");
+
+        bundle.putString("name", getIntent().getExtras().getString("name"));
 
         db = new DatabaseHelper(this);
-        final Workout workout = db.getWorkoutById(workoutId);
+        readCompoundLifts();
+
+        Intent intent = getIntent();
+        workoutId = getIntent().getExtras().getLong("workoutId");
+
+        workout = db.getWorkoutById(workoutId);
 
         editWeight = (EditText) findViewById(R.id.editTextWeight);
-        spinner = (Spinner) findViewById(R.id.listViewCompoundLifts);
+        editWeight.setText(workout.getWeight() + "");
+
+        int selectedCompound = (int) workout.getCompoundId() - 1;
+        Spinner spinner = (Spinner) findViewById(R.id.listViewCompoundLifts);
+        spinner.setSelection(selectedCompound);
+
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        buttonDelete = (Button) findViewById(R.id.buttonDelete);
-
-
-        buttonUpdate = (Button) findViewById(R.id.buttonUpdate);
-
-            editWeight.setText(workout.getWeight()+"");
-
-
-             // spinner.setSelection((int) workout.getCompoundId());
-
-
-
-
-
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                db.updateWorkout(workout);
-
-                Intent intent = new Intent(UpdateDeleteWorkoutActivity.this,HighscoresActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.deleteWorkout(workoutId);
-
-
-                Intent intent = new Intent(UpdateDeleteWorkoutActivity.this, HighscoresActivity.class);
-                startActivity(intent);
-
-            }
-        });
+        // Hier moet nog de workout.datum opgeladen worden
     }
 
+    public void buttonUpdate_onClick(View view) {
+        Workout workoutEdit = new Workout();
+        double weight = 0.0;
+        String date = null;
+        Long compoundId = null;
+
+        EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
+        weight = Double.parseDouble(editTextWeight.getText().toString());
+
+        DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
+        date = String.valueOf(datePicker.getDayOfMonth()) + "/" + String.valueOf(datePicker.getMonth() + "/" + String.valueOf(datePicker.getYear()));
+
+        Spinner editCompound = (Spinner) findViewById(R.id.listViewCompoundLifts);
+        compoundId = editCompound.getSelectedItemId() + 1;
+
+        if (editTextWeight.getText() == null) {
+            TextView textViewWeightError = (TextView) findViewById(R.id.textViewWeightError);
+            textViewWeightError.setText("Pleas fill in weight");
+            textViewWeightError.setVisibility(View.VISIBLE);
+        } else {
+            workoutEdit.setWeight(weight);
+            workoutEdit.setDate(date);
+            workoutEdit.setCompoundId(compoundId);
+
+            Log.i("INFO", "workout: " + workout);
+            Log.i("INFO", "workoutEdit: " + workoutEdit);
+
+            db.updateWorkout(workoutId, workoutEdit);
+            Toast.makeText(UpdateDeleteWorkoutActivity.this, "Updates succesfully ! ", Toast.LENGTH_SHORT).show();
+
+            Intent highscoresActivity = new Intent(UpdateDeleteWorkoutActivity.this, HighscoresActivity.class);
+            highscoresActivity.putExtras(bundle);
+            startActivity(highscoresActivity);
+        }
+    }
+
+    public void buttonDelete_onClick(View view) {
+        db.deleteWorkout(workoutId);
+        Toast.makeText(UpdateDeleteWorkoutActivity.this, "Deleted succesfully ! ", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(UpdateDeleteWorkoutActivity.this, HighscoresActivity.class);
+        startActivity(intent);
+    }
+
+    private void readCompoundLifts() {
+        List<CompoundLift> compoundLifts = db.getCompoundLifts();
+
+        ArrayAdapter<CompoundLift> adapter = new ArrayAdapter<CompoundLift>(this,
+                android.R.layout.simple_spinner_item, compoundLifts);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = findViewById(R.id.listViewCompoundLifts);
+
+        spinner.setAdapter(adapter);
+    }
 }

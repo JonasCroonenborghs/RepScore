@@ -11,7 +11,7 @@ public class Workout implements Serializable {
 
     private String coumpound;
 
-    public Workout(){
+    public Workout() {
 
     }
 

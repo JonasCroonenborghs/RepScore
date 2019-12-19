@@ -23,5 +23,4 @@
     <include layout="@layout/content_highscores" />
 
 
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

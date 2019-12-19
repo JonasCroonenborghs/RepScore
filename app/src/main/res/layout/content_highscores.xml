@@ -9,35 +9,32 @@
     tools:showIn="@layout/activity_highscores">
 
     <LinearLayout
+        android:id="@+id/linearLayoutExercise"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingTop="10dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="50dp"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Your results !"
-            android:textSize="20dp" />
+        <ImageView
+            android:id="@+id/imageViewHighscores"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:contentDescription="@string/image_user"
+            android:padding="20dp"
+            android:src="@drawable/highscores_list" />
 
         <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/border_shadow"
             android:orientation="vertical">
 
             <ListView
                 android:id="@+id/listViewWorkouts"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
                 android:divider="@color/orangeRed"
                 android:dividerHeight="1dp" />
 

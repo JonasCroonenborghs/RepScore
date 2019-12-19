@@ -28,7 +28,8 @@ public class HighscoresActivity extends AppCompatActivity {
         setContentView(R.layout.activity_highscores);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("1 Rep Maxes");
+        setTitle("Workouts");
+
         bundle.putString("name", getIntent().getExtras().getString("name"));
 
         db = new DatabaseHelper(this);

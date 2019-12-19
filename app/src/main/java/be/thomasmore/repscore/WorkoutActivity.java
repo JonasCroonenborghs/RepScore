@@ -2,8 +2,6 @@ package be.thomasmore.repscore;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -69,8 +67,6 @@ public class WorkoutActivity extends AppCompatActivity {
     private void readCompoundLifts() {
         List<CompoundLift> compoundLifts = db.getCompoundLifts();
 
-
-
         ArrayAdapter<CompoundLift> adapter = new ArrayAdapter<CompoundLift>(this,
                 android.R.layout.simple_spinner_item, compoundLifts);
 
@@ -78,15 +74,13 @@ public class WorkoutActivity extends AppCompatActivity {
         spinner = findViewById(R.id.listViewCompoundLifts);
 
         spinner.setAdapter(adapter);
-
     }
 
 
     public void buttonAddWorkout_onClick(View view) {
-        double weight = 0;
+        double weight = 0.0;
         String date = null;
         Long compoundId = null;
-
 
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
         weight = Double.parseDouble(editTextWeight.getText().toString());
@@ -95,22 +89,24 @@ public class WorkoutActivity extends AppCompatActivity {
         date = String.valueOf(datePicker.getDayOfMonth()) + "/" + String.valueOf(datePicker.getMonth() + "/" + String.valueOf(datePicker.getYear()));
 
         Spinner editCompound = (Spinner) findViewById(R.id.listViewCompoundLifts);
-        compoundId = editCompound.getSelectedItemId()+1;
-
+        compoundId = editCompound.getSelectedItemId() + 1;
 
         Workout workout = new Workout();
 
-        if (TextUtils.isEmpty(editTextWeight.toString())) {
-
-            Toast.makeText(WorkoutActivity.this,"Fill in weight",Toast.LENGTH_SHORT).show();
+        if (editTextWeight.getText() == null) {
+            TextView textViewWeightError = (TextView) findViewById(R.id.textViewWeightError);
+            textViewWeightError.setText("Pleas fill in weight");
+            textViewWeightError.setVisibility(View.VISIBLE);
         } else {
             workout.setWeight(weight);
             workout.setDate(date);
             workout.setCompoundId(compoundId);
-            Log.i("INFO", "workout: " + workout);
 
-            Toast.makeText(WorkoutActivity.this, "Added 1RM Succesfully ! ",Toast.LENGTH_SHORT).show();
-        db.insertWorkout(workout);
+            Toast.makeText(WorkoutActivity.this, "Added 1RM succesfully ! ", Toast.LENGTH_SHORT).show();
+            db.insertWorkout(workout);
+            Intent highscoresActivity = new Intent(WorkoutActivity.this, HighscoresActivity.class);
+            highscoresActivity.putExtras(bundle);
+            startActivity(highscoresActivity);
         }
     }
 }

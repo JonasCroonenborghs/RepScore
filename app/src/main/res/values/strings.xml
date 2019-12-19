@@ -27,14 +27,19 @@
     <string name="image_musclegroups">Image of musclegroups</string>
     <string name="image_exercise">Image of exercise</string>
     <string name="image_towel">Image of a towel</string>
+    <string name="image_pencil">Image of a towel</string>
     <string name="title_activity_update_delete_workout">UpdateDeleteWorkoutActivity</string>
     <string name="text_change_chart">Show chart max weight or total amounts</string>
     <string name="text_show_total">Show total amounts</string>
     <string name="text_show_max">Show max weight</string>
     <string name="text_start_tracking">Start tracking your workout</string>
     <string name="text_show_exercises">Show different exercises</string>
-    <string name="change">Change</string>
-    <string name="delete">Delete</string>
+    <string name="text_update">Update</string>
+    <string name="text_delete">Delete</string>
     <string name="text_go_back">Go back</string>
     <string name="text_go_home">Go to home</string>
+    <string name="text_add_a_1RM">Add a 1 Rep Max !</string>
+    <string name="text_pick_compound">Pick a compound exercise</string>
+    <string name="text_weight">Weight</string>
+    <string name="text_your_results">Your results !</string>
 </resources>

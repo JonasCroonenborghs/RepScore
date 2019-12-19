@@ -10,83 +10,91 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayoutAddWorkout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/border_shadow"
-        android:gravity="center|center_horizontal"
         android:orientation="vertical"
-        android:padding="20dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="10dp">
+        tools:ignore="MissingConstraints">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Did something wrong ?"
-            android:textSize="25sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:text="Change your compound exercise" />
-
-        <Spinner
-            android:id="@+id/listViewCompoundLifts"
+        <ImageView
+            android:id="@+id/imageViewWorkout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:gravity="center" />
+            android:layout_height="200dp"
+            android:contentDescription="@string/image_pencil"
+            android:padding="20dp"
+            android:src="@drawable/update_pencil" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:text="Weight" />
-
-        <TextView
-            android:id="@+id/textViewWeightError"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="#FF0000"
-            android:visibility="invisible" />
+            android:layout_height="match_parent"
+            android:background="@drawable/border_shadow"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <EditText
-            android:id="@+id/editTextWeight"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:text="Date" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="@string/text_pick_compound" />
 
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+            <Spinner
+                android:id="@+id/listViewCompoundLifts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown" />
 
-                <Button
-                    android:id="@+id/buttonUpdate"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_button"
-                    android:text="@string/change" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="@string/text_weight" />
 
-        <Button
-            android:id="@+id/buttonDelete"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
-            android:text="@string/delete" />
+            <EditText
+                android:id="@+id/editTextWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/textViewWeightError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/buttonUpdate"
+                android:layout_width="125dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_button"
+                android:onClick="buttonUpdate_onClick"
+                android:text="@string/text_update"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/whiteSmoke"
+                android:onClick="buttonDelete_onClick"
+                android:text="@string/text_delete"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
