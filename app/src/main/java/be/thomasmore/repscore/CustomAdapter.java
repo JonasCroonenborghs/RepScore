@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
@@ -21,7 +19,6 @@ public class CustomAdapter extends BaseAdapter {
         this.context = context;
         this.workoutArrayList = workoutArrayList;
     }
-
 
     @Override
     public int getCount() {
@@ -48,33 +45,24 @@ public class CustomAdapter extends BaseAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.workout_item, null, true);
 
-
-
             holder.tvCompound = (TextView) convertView.findViewById(R.id.compound);
             holder.tvWeight = (TextView) convertView.findViewById(R.id.weight);
             holder.tvDate = (TextView) convertView.findViewById(R.id.date);
 
-
-
             convertView.setTag(holder);
-        }else {
-            holder = (ViewHolder)convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-
-
         holder.tvCompound.setText(workoutArrayList.get(position).getCoumpound());
-        holder.tvDate.setText( "On " +workoutArrayList.get(position).getDate());
-        holder.tvWeight.setText("your 1 RM was " +workoutArrayList.get(position).getWeight() + " kg.");
-
-
+        holder.tvDate.setText(workoutArrayList.get(position).getDate());
+        holder.tvWeight.setText("your 1 RM " + workoutArrayList.get(position).getWeight() + " kg");
 
         return convertView;
     }
 
     private class ViewHolder {
-
-        protected TextView tvCompound,tvWeight, tvDate;
+        protected TextView tvCompound, tvWeight, tvDate;
     }
 
 }
