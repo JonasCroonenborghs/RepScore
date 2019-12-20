@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RadioGroup;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,17 +83,29 @@ public class HighscoresActivity extends AppCompatActivity {
     }
 
     public void buttonFilter_onClick(View view) {
-        RadioGroup radioGroupCompound = (RadioGroup) findViewById(R.id.radioGroupCompound);
-        long workoutId = radioGroupCompound.getCheckedRadioButtonId();
+        long workoutId = 0;
+        db = new DatabaseHelper(this);
 
-        if (workoutId != -1) {
-            db = new DatabaseHelper(this);
-            workoutArrayList = db.getAllWorkoutsByFilter(workoutId);
+        RadioButton radioButtonBenchPress = (RadioButton) findViewById(R.id.radioButtonBenchPress);
+        RadioButton radioButtonDeadlift = (RadioButton) findViewById(R.id.radioButtonDeadlift);
+        RadioButton radioButtonMilitaryPress = (RadioButton) findViewById(R.id.radioButtonMilitaryPress);
+        RadioButton radioButtonSquad = (RadioButton) findViewById(R.id.radioButtonSquad);
 
-            listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
-            customAdapter = new CustomAdapter(this, workoutArrayList);
-            listViewWorkouts.setAdapter(customAdapter);
+        if (radioButtonBenchPress.isChecked()) {
+            workoutId = 1;
+        } else if (radioButtonDeadlift.isChecked()) {
+            workoutId = 2;
+        } else if (radioButtonMilitaryPress.isChecked()) {
+            workoutId = 3;
+        } else if (radioButtonSquad.isChecked()) {
+            workoutId = 4;
         }
+
+        workoutArrayList = db.getAllWorkoutsByFilter(workoutId);
+
+        listViewWorkouts = (ListView) findViewById(R.id.listViewWorkouts);
+        customAdapter = new CustomAdapter(this, workoutArrayList);
+        listViewWorkouts.setAdapter(customAdapter);
     }
 
     @Override

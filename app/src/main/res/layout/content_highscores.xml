@@ -32,21 +32,25 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/radioButtonBenchPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bench press" />
 
             <RadioButton
+                android:id="@+id/radioButtonDeadlift"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Deadlift" />
 
             <RadioButton
+                android:id="@+id/radioButtonMilitaryPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Military Press" />
 
             <RadioButton
+                android:id="@+id/radioButtonSquad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Squad" />

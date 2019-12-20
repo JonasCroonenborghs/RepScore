@@ -8,7 +8,6 @@
     tools:context=".UpdateDeleteWorkoutActivity"
     tools:showIn="@layout/activity_update_delete_workout">
 
-
     <LinearLayout
         android:id="@+id/linearLayoutAddWorkout"
         android:layout_width="match_parent"
