@@ -15,9 +15,9 @@
     <string name="fb_login_protocol_scheme">fb458578941458032</string>
 
     <string name="title_activity_user">UserActivity</string>
-    <string name="text_go_homescreen">Go to homescreen</string>
+    <string name="text_go_homescreen">Homescreen</string>
     <string name="text_ready_for_workout">Ready for your workout? \n Log in with FaceBook! \n Already logged in? \n Go to homescreen! </string>
-    <string name="text_add_1RM">Add 1 RM to your workouts</string>
+    <string name="text_add_1RM">Add</string>
     <string name="text_choose_musclegroup">Choose a musclegroup</string>
     <string name="text_loading">Loading exercises, this might take a while...</string>
     <string name="image_logo">Logo</string>
@@ -36,8 +36,7 @@
     <string name="text_show_exercises">Show exercises</string>
     <string name="text_update">Update</string>
     <string name="text_delete">Delete</string>
-    <string name="text_go_back">Go back</string>
-    <string name="text_go_home">Go to home</string>
+    <string name="text_go_back">Back</string>
     <string name="text_add_a_1RM">Add a 1 Rep Max !</string>
     <string name="text_pick_compound">Pick a compound exercise</string>
     <string name="text_weight">Weight</string>
