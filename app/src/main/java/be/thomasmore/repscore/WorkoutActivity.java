@@ -2,7 +2,6 @@ package be.thomasmore.repscore;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -88,7 +87,7 @@ public class WorkoutActivity extends AppCompatActivity {
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        date = String.valueOf(datePicker.getDayOfMonth()) + "/" + String.valueOf(datePicker.getMonth() + "/" + String.valueOf(datePicker.getYear()));
+        date = String.valueOf(datePicker.getDayOfMonth()) + "/" + (String.valueOf(datePicker.getMonth() + 1) + "/" + String.valueOf(datePicker.getYear()));
 
         Spinner editCompound = (Spinner) findViewById(R.id.listViewCompoundLifts);
         compoundId = editCompound.getSelectedItemId() + 1;
