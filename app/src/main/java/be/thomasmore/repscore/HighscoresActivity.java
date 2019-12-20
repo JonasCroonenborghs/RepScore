@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +54,15 @@ public class HighscoresActivity extends AppCompatActivity {
                 bundle.putLong("workoutId", workoutId);
                 UpdateDeleteWorkoutActivity.putExtras(bundle);
                 startActivity(UpdateDeleteWorkoutActivity);
+            }
+        });
+
+        RadioGroup radioGroupCompound = (RadioGroup) findViewById(R.id.radioGroupCompound);
+        radioGroupCompound.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Button buttonFilter = (Button) findViewById(R.id.buttonFilter);
+                buttonFilter.setVisibility(View.VISIBLE);
             }
         });
 
