@@ -85,7 +85,6 @@ public class WorkoutActivity extends AppCompatActivity {
         Long compoundId = null;
 
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
-        weight = Double.parseDouble(editTextWeight.getText().toString());
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
         date = String.valueOf(datePicker.getDayOfMonth()) + "/" + String.valueOf(datePicker.getMonth() + "/" + String.valueOf(datePicker.getYear()));
@@ -95,11 +94,13 @@ public class WorkoutActivity extends AppCompatActivity {
 
         Workout workout = new Workout();
 
-        if (editTextWeight.getText() == null) {
+        if (editTextWeight.getText().toString().matches("")) {
             TextView textViewWeightError = (TextView) findViewById(R.id.textViewWeightError);
-            textViewWeightError.setText("Pleas fill in weight");
+            textViewWeightError.setText("Fill in 'Weight' and try again");
             textViewWeightError.setVisibility(View.VISIBLE);
         } else {
+            weight = Double.parseDouble(editTextWeight.getText().toString());
+
             workout.setWeight(weight);
             workout.setDate(date);
             workout.setCompoundId(compoundId);

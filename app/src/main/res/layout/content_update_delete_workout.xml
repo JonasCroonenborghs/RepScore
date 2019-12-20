@@ -89,7 +89,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/whiteSmoke"
+                android:backgroundTint="@color/lightGray"
                 android:onClick="buttonDelete_onClick"
                 android:text="@string/text_delete"
                 android:textColor="@color/white" />

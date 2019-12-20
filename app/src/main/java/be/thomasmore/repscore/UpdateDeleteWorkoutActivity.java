@@ -54,6 +54,7 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
         // Hier moet nog de workout.datum opgeladen worden
+        Log.i("INFO", "date: " + workout.getDate());
     }
 
     public void buttonUpdate_onClick(View view) {
@@ -63,7 +64,6 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         Long compoundId = null;
 
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
-        weight = Double.parseDouble(editTextWeight.getText().toString());
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
         date = String.valueOf(datePicker.getDayOfMonth()) + "/" + String.valueOf(datePicker.getMonth() + "/" + String.valueOf(datePicker.getYear()));
@@ -71,11 +71,13 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         Spinner editCompound = (Spinner) findViewById(R.id.listViewCompoundLifts);
         compoundId = editCompound.getSelectedItemId() + 1;
 
-        if (editTextWeight.getText() == null) {
+        if (editTextWeight.getText().toString().matches("")) {
             TextView textViewWeightError = (TextView) findViewById(R.id.textViewWeightError);
             textViewWeightError.setText("Pleas fill in weight");
             textViewWeightError.setVisibility(View.VISIBLE);
         } else {
+            weight = Double.parseDouble(editTextWeight.getText().toString());
+
             workoutEdit.setWeight(weight);
             workoutEdit.setDate(date);
             workoutEdit.setCompoundId(compoundId);
