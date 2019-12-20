@@ -175,8 +175,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int numrows = db.update(
                 "workout",
                 values,
-                "id = ?",
-                new String[]{String.valueOf(workout.getId())});
+                "id = " + id,
+                null);
         db.close();
         return numrows > 0;
     }
