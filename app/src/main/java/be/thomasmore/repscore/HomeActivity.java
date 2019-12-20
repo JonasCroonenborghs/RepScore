@@ -3,6 +3,7 @@ package be.thomasmore.repscore;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -42,15 +43,13 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("Home");
 
         db = new DatabaseHelper(this);
 
         // Put data in textViews
         String name = getIntent().getExtras().getString("name");
         bundle.putString("name", name);
-        TextView textViewUserName = (TextView) findViewById(R.id.textViewUserName);
-        textViewUserName.setText("Welcome " + name);
+        setTitle("Welcome " + name);
 
         TextView textViewTotalWorkouts = (TextView) findViewById(R.id.textViewTotalWorkouts);
         textViewTotalWorkouts.setText("You've registered " + db.getCountWorkouts() + " workouts so far");
@@ -113,6 +112,7 @@ public class HomeActivity extends AppCompatActivity {
         List yAxisValues = new ArrayList();
 
         List<Workout> workouts = db.getMaxWeightPerCompuntlift();
+        double maxWeight = db.getMaxWeight();
 
         axisData = new String[workouts.size()];
         yAxisData = new int[workouts.size()];
@@ -143,18 +143,18 @@ public class HomeActivity extends AppCompatActivity {
         Axis axis = new Axis();
         axis.setValues(axisValues);
         axis.setTextSize(16);
-        axis.setTextColor(Color.parseColor("#03A9F4"));
+        axis.setTextColor(Color.parseColor("#09c0c6"));
         data.setAxisXBottom(axis);
 
         Axis yAxis = new Axis();
-        yAxis.setName("Kilograms");
-        yAxis.setTextColor(Color.parseColor("#03A9F4"));
+        yAxis.setName("Maximum kilograms");
+        yAxis.setTextColor(Color.parseColor("#09c0c6"));
         yAxis.setTextSize(16);
         data.setAxisYLeft(yAxis);
 
         lineChartView.setLineChartData(data);
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = 140;
+        viewport.top = (float) maxWeight;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
     }
@@ -166,18 +166,21 @@ public class HomeActivity extends AppCompatActivity {
         List yAxisValues = new ArrayList();
 
         List<CompoundLift> compoundLifts = db.getTotalAmountPerCompuntlift();
+        int maxAmount = db.getMaxAmount();
 
         axisData = new String[compoundLifts.size()];
         yAxisData = new int[compoundLifts.size()];
         int counter = 0;
 
         for (CompoundLift compoundLift : compoundLifts) {
+            Log.i("INFO", "compountLift: " + compoundLift.getTotalAmounts());
+
             axisData[counter] = compoundLift.getName();
             yAxisData[counter] = (int) compoundLift.getTotalAmounts();
             counter++;
         }
 
-        Line line = new Line(yAxisValues).setColor(Color.parseColor("#03A9F4"));
+        Line line = new Line(yAxisValues).setColor(Color.parseColor("#09c0c6"));
 
         for (int i = 0; i < axisData.length; i++) {
             axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
@@ -196,18 +199,18 @@ public class HomeActivity extends AppCompatActivity {
         Axis axis = new Axis();
         axis.setValues(axisValues);
         axis.setTextSize(16);
-        axis.setTextColor(Color.parseColor("#03A9F4"));
+        axis.setTextColor(Color.parseColor("#09c0c6"));
         data.setAxisXBottom(axis);
 
         Axis yAxis = new Axis();
-        yAxis.setName("Amount");
-        yAxis.setTextColor(Color.parseColor("#03A9F4"));
+        yAxis.setName("Times lifted");
+        yAxis.setTextColor(Color.parseColor("#09c0c6"));
         yAxis.setTextSize(16);
         data.setAxisYLeft(yAxis);
 
         lineChartView.setLineChartData(data);
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = counter;
+        viewport.top = maxAmount;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
     }

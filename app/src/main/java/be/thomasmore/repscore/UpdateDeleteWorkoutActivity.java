@@ -70,12 +70,13 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        String month = String.valueOf(datePicker.getMonth());
+        int month = datePicker.getMonth() + 1;
+        String monthConverted = String.valueOf(month);
 
-        if (month.length() == 2) {
-            date = String.valueOf(datePicker.getDayOfMonth()) + "/" + month + "/" + String.valueOf(datePicker.getYear());
+        if (monthConverted.length() == 2) {
+            date = String.valueOf(datePicker.getDayOfMonth()) + "/" + monthConverted + "/" + String.valueOf(datePicker.getYear());
         } else {
-            date = String.valueOf(datePicker.getDayOfMonth()) + "/0" + month + "/" + String.valueOf(datePicker.getYear());
+            date = String.valueOf(datePicker.getDayOfMonth()) + "/0" + monthConverted + "/" + String.valueOf(datePicker.getYear());
         }
 
 
@@ -108,8 +109,10 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
     public void buttonDelete_onClick(View view) {
         db.deleteWorkout(workoutId);
         Toast.makeText(UpdateDeleteWorkoutActivity.this, "Deleted succesfully ! ", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(UpdateDeleteWorkoutActivity.this, HighscoresActivity.class);
-        startActivity(intent);
+        Intent highscoresActivity = new Intent(UpdateDeleteWorkoutActivity.this, HighscoresActivity.class);
+        bundle.putString("name", getIntent().getExtras().getString("name"));
+        highscoresActivity.putExtras(bundle);
+        startActivity(highscoresActivity);
     }
 
     private void readCompoundLifts() {

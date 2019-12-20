@@ -32,7 +32,7 @@ public class WorkoutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("Workout");
+        setTitle("Add workout");
 
         bundle.putString("name", getIntent().getExtras().getString("name"));
 

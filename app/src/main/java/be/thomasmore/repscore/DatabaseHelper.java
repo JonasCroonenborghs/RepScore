@@ -5,13 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "repscore";
 
     public DatabaseHelper(Context context) {
@@ -288,6 +290,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public double getMaxWeight() {
+        double maxWeight = 0;
+
+        String selectQuery = "SELECT MAX(weight) FROM workout";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                maxWeight = cursor.getDouble(0);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return maxWeight;
+    }
+
     public List<CompoundLift> getTotalAmountPerCompuntlift() {
         List<CompoundLift> list = new ArrayList<CompoundLift>();
 
@@ -318,15 +339,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    public int getCountCompoundLifts() {
-        String selectQuery = "SELECT  * FROM compoundlift";
+    public int getMaxAmount() {
+        int totalAmount = 0;
+        List<Integer> listTotalAmounts = new ArrayList<>();
+        int counter = 0;
+
+        String selectQuery = "SELECT COUNT(*) FROM workout GROUP BY compoundId";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        int aantal = cursor.getCount();
+
+        if (cursor.moveToFirst()) {
+            do {
+                listTotalAmounts.add(cursor.getInt(0));
+            } while (cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
-        return aantal;
+        return Collections.max(listTotalAmounts);
     }
 }
