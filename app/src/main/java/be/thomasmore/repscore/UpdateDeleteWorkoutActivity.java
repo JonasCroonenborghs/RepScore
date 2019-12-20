@@ -31,6 +31,8 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_delete_workout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Update workout");
 
         bundle.putString("name", getIntent().getExtras().getString("name"));
@@ -107,5 +109,11 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         spinner = findViewById(R.id.listViewCompoundLifts);
 
         spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

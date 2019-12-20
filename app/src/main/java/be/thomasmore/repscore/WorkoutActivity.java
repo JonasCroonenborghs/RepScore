@@ -30,6 +30,8 @@ public class WorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_workout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Workout");
 
         bundle.putString("name", getIntent().getExtras().getString("name"));
@@ -108,5 +110,11 @@ public class WorkoutActivity extends AppCompatActivity {
             highscoresActivity.putExtras(bundle);
             startActivity(highscoresActivity);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

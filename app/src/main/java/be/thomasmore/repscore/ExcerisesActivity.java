@@ -35,6 +35,8 @@ public class ExcerisesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_excerises);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("All Exercises");
 
         readMuscleGroups();
@@ -170,5 +172,11 @@ public class ExcerisesActivity extends AppCompatActivity {
             });
             httpReader.execute("https://wger.de/api/v2/exerciseimage/?format=json&page=" + i);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -2,8 +2,8 @@
     <string name="app_name">RepScore</string>
     <string name="action_settings">Settings</string>
     <string name="title">Welcome to RepScore!</string>
-    <string name="auteurJonas">Jonas Croonenborghs - r0615258</string>
-    <string name="auteurJasper">Jasper Claes - r0746526</string>
+    <string name="auteurJonas">Jonas Croonenborghs \n r0615258</string>
+    <string name="auteurJasper">Jasper Claes \n r0746526</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_home">HomeActivity</string>

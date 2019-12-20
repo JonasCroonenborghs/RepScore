@@ -29,6 +29,8 @@ public class HighscoresActivity extends AppCompatActivity {
         setContentView(R.layout.activity_highscores);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Workouts");
 
         bundle.putString("name", getIntent().getExtras().getString("name"));
@@ -92,5 +94,11 @@ public class HighscoresActivity extends AppCompatActivity {
             customAdapter = new CustomAdapter(this, workoutArrayList);
             listViewWorkouts.setAdapter(customAdapter);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

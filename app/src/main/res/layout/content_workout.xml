@@ -79,7 +79,7 @@
             <Button
                 android:id="@+id/buttonAddWorkout"
                 android:layout_width="125dp"
-                android:layout_height="100dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/rounded_button"
