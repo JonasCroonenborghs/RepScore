@@ -35,25 +35,33 @@
                 android:id="@+id/radioButtonBenchPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bench press" />
+                android:buttonTint="@color/white"
+                android:text="Bench press"
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/radioButtonDeadlift"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Deadlift" />
+                android:buttonTint="@color/white"
+                android:text="Deadlift"
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/radioButtonMilitaryPress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Military Press" />
+                android:buttonTint="@color/white"
+                android:text="Military Press"
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/radioButtonSquad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Squat" />
+                android:buttonTint="@color/white"
+                android:text="Squat"
+                android:textColor="@color/white" />
 
         </RadioGroup>
 
