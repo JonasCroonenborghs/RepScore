@@ -4,12 +4,12 @@
     <string name="title">Welcome to RepScore!</string>
     <string name="auteurJonas">Jonas Croonenborghs \n r0615258</string>
     <string name="auteurJasper">Jasper Claes \n r0746526</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_start">Start</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_excerises">ExcerisesActivity</string>
-    <string name="title_activity_workout">WorkoutActivity</string>
-    <string name="title_activity_highscores">HighscoresActivity</string>
+    <string name="title_activity_excerises">Excerises</string>
+    <string name="title_activity_workout">Workout</string>
+    <string name="title_activity_highscores">Highscores</string>
 
     <string name="facebook_app_id">458578941458032</string>
     <string name="fb_login_protocol_scheme">fb458578941458032</string>

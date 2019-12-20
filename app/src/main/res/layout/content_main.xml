@@ -42,9 +42,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="@string/auteurJonas"
-                android:textSize="15sp" />
+                android:textSize="17.5sp" />
 
             <ImageView
                 android:id="@+id/imageViewAuthorJasper"
@@ -60,7 +61,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/auteurJasper"
-                android:textSize="15sp" />
+                android:textSize="17.5sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

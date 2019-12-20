@@ -33,7 +33,7 @@ public class HighscoresActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("Workouts");
+        setTitle("Highscores");
 
         bundle.putString("name", getIntent().getExtras().getString("name"));
 
