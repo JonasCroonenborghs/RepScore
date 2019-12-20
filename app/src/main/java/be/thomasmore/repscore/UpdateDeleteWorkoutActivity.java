@@ -53,8 +53,12 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         spinner.setSelection(selectedCompound);
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        // Hier moet nog de workout.datum opgeladen worden
-        Log.i("INFO", "date: " + workout.getDate());
+
+        int day = Integer.parseInt(workout.getDate().substring(0, 2));
+        int monthConverted = Integer.parseInt(workout.getDate().substring(3, 5)) - 1;
+        int year = Integer.parseInt(workout.getDate().substring(6, 10));
+
+        datePicker.updateDate(year, monthConverted, day);
     }
 
     public void buttonUpdate_onClick(View view) {
@@ -66,7 +70,14 @@ public class UpdateDeleteWorkoutActivity extends AppCompatActivity {
         EditText editTextWeight = (EditText) findViewById(R.id.editTextWeight);
 
         DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
-        date = String.valueOf(datePicker.getDayOfMonth()) + "/" + String.valueOf(datePicker.getMonth() + "/" + String.valueOf(datePicker.getYear()));
+        String month = String.valueOf(datePicker.getMonth());
+
+        if (month.length() == 2) {
+            date = String.valueOf(datePicker.getDayOfMonth()) + "/" + month + "/" + String.valueOf(datePicker.getYear());
+        } else {
+            date = String.valueOf(datePicker.getDayOfMonth()) + "/0" + month + "/" + String.valueOf(datePicker.getYear());
+        }
+
 
         Spinner editCompound = (Spinner) findViewById(R.id.listViewCompoundLifts);
         compoundId = editCompound.getSelectedItemId() + 1;

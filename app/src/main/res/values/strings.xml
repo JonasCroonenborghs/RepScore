@@ -18,13 +18,13 @@
     <string name="text_go_homescreen">Homescreen</string>
     <string name="text_ready_for_workout">Ready for your workout? \n Log in with FaceBook! \n Already logged in? \n Go to homescreen! </string>
     <string name="text_add_1RM">Add</string>
-    <string name="text_choose_musclegroup">Choose a musclegroup</string>
+    <string name="text_choose_musclegroup">Choose a muscle group</string>
     <string name="text_loading">Loading exercises, this might take a while...</string>
     <string name="image_logo">Logo</string>
     <string name="image_author_Jonas">Image author Jonas</string>
     <string name="image_author_Jasper">Image author Jasper</string>
     <string name="image_user">Image of a user</string>
-    <string name="image_musclegroups">Image of musclegroups</string>
+    <string name="image_musclegroups">Image of muscle groups</string>
     <string name="image_exercise">Image of exercise</string>
     <string name="image_towel">Image of a towel</string>
     <string name="image_pencil">Image of a towel</string>
