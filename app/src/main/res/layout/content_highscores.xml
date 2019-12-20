@@ -53,7 +53,7 @@
                 android:id="@+id/radioButtonSquad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Squad" />
+                android:text="Squat" />
 
         </RadioGroup>
 
@@ -64,10 +64,10 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_button"
-            android:visibility="invisible"
             android:onClick="buttonFilter_onClick"
             android:text="Filter"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -47,7 +47,9 @@ public class ExcerisesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 readExercises(position);
                 LinearLayout linearLayoutMuscleGroups = (LinearLayout) findViewById(R.id.linearLayoutMuscleGroups);
+                ListView listViewExercises = (ListView) findViewById(R.id.listViewExercises);
                 linearLayoutMuscleGroups.setVisibility(View.INVISIBLE);
+                listViewExercises.setVisibility(View.VISIBLE);
             }
         });
 
