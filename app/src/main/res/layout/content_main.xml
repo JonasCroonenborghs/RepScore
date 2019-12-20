@@ -66,29 +66,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_login"
                     android:layout_width="125dp"
-                    android:layout_height="75dp"
+                    android:layout_height="125dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/rounded_button"
                     android:onClick="btn_login_onClick"
                     android:text="@string/text_start_tracking"
-                    android:textColor="@color/white"
-                    tools:ignore="ButtonStyle" />
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/btn_exercises"
                     android:layout_width="125dp"
-                    android:layout_height="75dp"
+                    android:layout_height="125dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/rounded_button"
                     android:onClick="btn_exercises_onClick"
                     android:text="@string/text_show_exercises"
-                    android:textColor="@color/white"
-                    tools:ignore="ButtonStyle" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
         </LinearLayout>
